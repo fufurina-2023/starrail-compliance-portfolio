@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《崩坏：星穹铁道》数据与 AI 合规作品集预览</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5e687d;
+      --paper: #f6f7fb;
+      --panel: #ffffff;
+      --line: #d9deea;
+      --accent: #b8862b;
+      --accent-dark: #775516;
+      --blue: #234a7c;
+      --blue-soft: #e9f0f8;
+      --gold-soft: #fbf3df;
+      --green: #1f6f54;
+      --red: #9b2c2c;
+      --shadow: 0 18px 50px rgba(23, 32, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(246, 247, 251, 0.96), rgba(246, 247, 251, 1)),
+        repeating-linear-gradient(90deg, rgba(35, 74, 124, 0.06) 0, rgba(35, 74, 124, 0.06) 1px, transparent 1px, transparent 60px);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 32px 24px;
+      background: #101827;
+      color: #f4f7fb;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: auto;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: #ffe6a6;
+      border: 1px solid rgba(255, 230, 166, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .sidebar h1 {
+      margin: 0;
+      font-size: 21px;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .sidebar .meta {
+      margin: 14px 0 28px;
+      color: #aab4c6;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .nav-title {
+      margin: 26px 0 10px;
+      color: #ffe6a6;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-tree {
+      display: grid;
+      gap: 9px;
+    }
+
+    .nav-group {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .nav-group summary {
+      position: relative;
+      display: block;
+      padding: 10px 32px 10px 12px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    .nav-group summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .nav-group summary::after {
+      content: "+";
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      color: #ffe6a6;
+      font-weight: 700;
+      transform: translateY(-50%);
+    }
+
+    .nav-group[open] summary::after {
+      content: "-";
+    }
+
+    .nav-group .nav {
+      gap: 2px;
+      padding: 0 0 8px 10px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 8px 10px;
+      color: #d8deea;
+      border-left: 2px solid transparent;
+      font-size: 13px;
+    }
+
+    .nav-group .nav a {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .nav a:hover {
+      color: #fff;
+      border-left-color: var(--accent);
+      background: rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+    }
+
+    .sidebar-note {
+      margin-top: 28px;
+      padding: 14px;
+      color: #d9e0ee;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 12px;
+    }
+
+    main {
+      padding: 44px 44px 72px;
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto 28px;
+      padding: 38px 42px 34px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(16, 24, 39, 0.98), rgba(35, 74, 124, 0.96)),
+        linear-gradient(90deg, transparent 0, transparent 96%, rgba(255, 255, 255, 0.14) 96%, rgba(255, 255, 255, 0.14) 100%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      color: #f8e9bd;
+      border: 1px solid rgba(248, 233, 189, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .hero h2 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.22;
+      letter-spacing: 0;
+      max-width: 880px;
+    }
+
+    .hero p {
+      max-width: 870px;
+      margin: 18px 0 0;
+      color: #dbe5f3;
+      font-size: 16px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 1120px;
+      margin: 0 auto 30px;
+    }
+
+    .metric {
+      padding: 18px 18px 16px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(23, 32, 51, 0.06);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.1;
+      color: var(--blue);
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .content {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      gap: 22px;
+    }
+
+    section {
+      padding: 28px 30px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 28px rgba(23, 32, 51, 0.05);
+    }
+
+    section h3 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 16px;
+      color: var(--ink);
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .section-no {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
+
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .callout {
+      padding: 16px 18px;
+      background: var(--blue-soft);
+      border-left: 4px solid var(--blue);
+    }
+
+    .callout strong {
+      color: var(--blue);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .list-clean {
+      margin: 0;
+      padding-left: 19px;
+    }
+
+    .list-clean li {
+      margin: 8px 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 0;
+    }
+
+    .tag {
+      padding: 4px 9px;
+      color: var(--accent-dark);
+      background: var(--gold-soft);
+      border: 1px solid #efd99f;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(105px, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+
+    .flow-item {
+      position: relative;
+      min-height: 92px;
+      padding: 14px 12px;
+      background: #f9fafc;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .flow-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-top: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      transform: translateY(-50%) rotate(45deg);
+      background: transparent;
+      z-index: 2;
+    }
+
+    .flow-item b {
+      display: block;
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .flow-item span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 4px;
+      table-layout: fixed;
+      font-size: 13px;
+    }
+
+    th,
+    td {
+      padding: 12px 12px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    th {
+      background: #eef2f8;
+      color: #23314a;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #fbfcfe;
+    }
+
+    .risk {
+      display: inline-flex;
+      min-width: 58px;
+      justify-content: center;
+      padding: 2px 8px;
+      font-weight: 700;
+      font-size: 12px;
+      border: 1px solid currentColor;
+    }
+
+    .risk.high {
+      color: var(--red);
+      background: #fff1f1;
+    }
+
+    .risk.mid {
+      color: #8a5a00;
+      background: #fff7e5;
+    }
+
+    .risk.low {
+      color: var(--green);
+      background: #edf8f3;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .check-item {
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+
+    .check-item b {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 5px;
+    }
+
+    .check-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .check-item p strong {
+      color: var(--ink);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr);
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+
+    .timeline-row b {
+      color: var(--blue);
+    }
+
+    .timeline-row p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .source-list {
+      columns: 2;
+      column-gap: 28px;
+      margin: 0;
+      padding-left: 19px;
+      font-size: 13px;
+    }
+
+    .source-list li {
+      break-inside: avoid;
+      margin: 7px 0;
+    }
+
+    .project-break {
+      padding: 26px 30px;
+      color: #fff;
+      background: linear-gradient(135deg, #142033, #234a7c);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 28px rgba(23, 32, 51, 0.06);
+    }
+
+    .project-break h3 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .project-break p {
+      margin: 0;
+      max-width: 920px;
+      color: #dbe5f3;
+    }
+
+    .watermark-demo {
+      position: relative;
+      min-height: 188px;
+      padding: 22px;
+      overflow: hidden;
+      color: #f7f9fd;
+      background:
+        linear-gradient(135deg, rgba(184, 134, 43, 0.86), rgba(35, 74, 124, 0.92)),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0.16) 1px, transparent 1px, transparent 16px);
+      border: 1px solid rgba(23, 32, 51, 0.18);
+    }
+
+    .watermark-demo::after {
+      content: "AI 生成 · 非官方原图 · 仅供个人非商业分享";
+      position: absolute;
+      right: -58px;
+      bottom: 36px;
+      width: 360px;
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      transform: rotate(-18deg);
+    }
+
+    .watermark-demo b {
+      display: block;
+      position: relative;
+      z-index: 1;
+      max-width: 260px;
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    .watermark-demo span {
+      display: block;
+      position: relative;
+      z-index: 1;
+      max-width: 290px;
+      margin-top: 10px;
+      color: #f3e9cd;
+      font-size: 13px;
+    }
+
+    .decision-tree {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .decision-step {
+      display: grid;
+      grid-template-columns: 110px minmax(0, 1fr);
+      gap: 14px;
+      padding: 15px;
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+    }
+
+    .decision-step b {
+      display: inline-grid;
+      place-items: center;
+      min-height: 34px;
+      color: #fff;
+      background: var(--blue);
+      font-size: 13px;
+    }
+
+    .decision-step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .path-card {
+      padding: 15px;
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+    }
+
+    .path-card b {
+      display: block;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .path-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      max-width: 1120px;
+      margin: 22px auto 0;
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      main {
+        padding: 28px 18px 50px;
+      }
+
+      .hero {
+        padding: 28px 24px;
+      }
+
+      .hero h2 {
+        font-size: 27px;
+      }
+
+      .summary-grid,
+      .two-col,
+      .check-grid,
+      .path-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .decision-step {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-item:not(:last-child)::after {
+        right: 50%;
+        top: auto;
+        bottom: -9px;
+        transform: translateX(50%) rotate(135deg);
+      }
+
+      .timeline-row {
+        grid-template-columns: 1fr;
+      }
+
+      .source-list {
+        columns: 1;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .shell {
+        display: block;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      main {
+        padding: 0;
+      }
+
+      .hero,
+      section,
+      .metric {
+        box-shadow: none;
+      }
+
+      section {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand-mark">SR</div>
+      <h1>游戏产品数据与 AI 合规作品集</h1>
+      <div class="meta">
+        目标岗位：境内法务实习生（数据合规）<br>
+        案例对象：《崩坏：星穹铁道》<br>
+        章节：01-04 数据与 AI 合规案例
+      </div>
+      <div class="nav-title">章节导航</div>
+      <div class="nav-tree">
+        <ul class="nav">
+          <li><a href="#overview">项目概览</a></li>
+        </ul>
+        <details class="nav-group" open>
+          <summary>项目一：帕姆帮帮</summary>
+          <ul class="nav">
+            <li><a href="#project-one">项目说明</a></li>
+            <li><a href="#scenario">01 公开信息与结论</a></li>
+            <li><a href="#dataflow">02 数据流与字段</a></li>
+            <li><a href="#pipia">03 PIPIA 判断</a></li>
+            <li><a href="#ai">04 AI 合规专项</a></li>
+            <li><a href="#minor">05 未成年人保护</a></li>
+            <li><a href="#action">06 复盘整改清单</a></li>
+          </ul>
+        </details>
+        <details class="nav-group" open>
+          <summary>项目二：AIGC 二创工坊</summary>
+          <ul class="nav">
+            <li><a href="#aigc-overview">项目说明</a></li>
+            <li><a href="#aigc-scenario">01 功能设定与结论</a></li>
+            <li><a href="#aigc-flow">02 功能链路与边界</a></li>
+            <li><a href="#aigc-assessment">03 AI 合规评估表</a></li>
+            <li><a href="#aigc-watermark">04 标识与水印</a></li>
+            <li><a href="#aigc-action">05 上线前 Checklist</a></li>
+          </ul>
+        </details>
+        <details class="nav-group" open>
+          <summary>项目三：境内 SDK 接入</summary>
+          <ul class="nav">
+            <li><a href="#sdk-overview">项目说明</a></li>
+            <li><a href="#sdk-scenario">01 场景与结论</a></li>
+            <li><a href="#sdk-inventory">02 SDK 风险台账</a></li>
+            <li><a href="#sdk-tree">03 境外访问排除</a></li>
+            <li><a href="#sdk-path">04 处理关系判断</a></li>
+            <li><a href="#sdk-checklist">05 尽调 Checklist</a></li>
+          </ul>
+        </details>
+        <details class="nav-group" open>
+          <summary>项目四：合规工具包</summary>
+          <ul class="nav">
+            <li><a href="#toolkit-overview">项目说明</a></li>
+            <li><a href="#toolkit-scenario">01 目标与结论</a></li>
+            <li><a href="#toolkit-ledger">02 处理活动台账</a></li>
+            <li><a href="#toolkit-field">03 字段分级表</a></li>
+            <li><a href="#toolkit-workflow">04 上线评审流程</a></li>
+            <li><a href="#toolkit-ticket">05 工单模板</a></li>
+            <li><a href="#toolkit-minor">06 未成年人专项</a></li>
+          </ul>
+        </details>
+        <ul class="nav">
+          <li><a href="#sources">主要参考依据</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-note">
+        本页为作品集预览稿，基于公开资料制作合规分析，不代表游戏官方或任何企业内部结论。
+      </div>
+    </aside>
+
+    <main>
+      <header class="hero">
+        <div class="kicker">
+          <span class="pill">法学 × AI × Python</span>
+          <span class="pill">数据合规评估</span>
+          <span class="pill">游戏产品理解</span>
+          <span class="pill">2027 届求职作品集</span>
+        </div>
+        <h2>《崩坏：星穹铁道》数据与 AI 合规作品集预览</h2>
+        <p>
+          包含项目一“帕姆帮帮（测试版）”公开功能复盘、项目二“AIGC 二创工坊”模拟新功能上线评估、项目三“境内第三方服务与 SDK 接入”合规评估，以及项目四“游戏产品数据合规体系落地工具包”，展示数据流拆解、PIPIA 触发判断、生成式 AI 内容安全、训练数据治理、生成内容标识、水印方案、第三方处理关系判断、SDK 尽调和跨团队合规流程设计等法务实习交付能力。
+        </p>
+      </header>
+
+      <div class="summary-grid" id="overview">
+        <div class="metric">
+          <strong>4 项</strong>
+          <span>复盘、评估、尽调、工具包</span>
+        </div>
+        <div class="metric">
+          <strong>帕姆帮帮</strong>
+          <span>数据与 AI 合规复盘</span>
+        </div>
+        <div class="metric">
+          <strong>AIGC / SDK</strong>
+          <span>新功能评估与第三方接入</span>
+        </div>
+        <div class="metric">
+          <strong>合规工具包</strong>
+          <span>体系落地与跨团队协作</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <section class="project-break" id="project-one">
+          <h3>项目一：帕姆帮帮（测试版）数据与 AI 合规复盘</h3>
+          <p>
+            基于《崩坏：星穹铁道》公开推出的游戏内 AI 智能对话助手，模拟法务/数据合规团队对已上线功能进行复盘评估、风险识别与优化建议输出。
+          </p>
+        </section>
+
+        <section id="scenario">
+          <h3><span class="section-no">01</span>公开信息与评估结论</h3>
+          <p class="lead">
+            公开资料显示，“帕姆帮帮（测试版）”是《崩坏：星穹铁道》4.2 版本期间推出的游戏内 AI 智能对话/助手功能，入口位于游戏聊天列表，功能内容包括星海导航、角色养成方案、泛对话、帕姆换装和每周奖励等模块。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>建议结论：</strong>已具备若干积极合规设计，但仍应按“中高风险 AI 互动功能”持续治理。尤其要复核内容数据用于模型训练、去标识化标准、未成年人账号策略和 AI 标识留存。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>公开说明中已提示对话内容由人工智能技术生成。</li>
+                <li>测试期结束后暂时下线优化，具备复盘空间。</li>
+                <li>玩家输入与 AI 回复可能用于内容分析和模型训练。</li>
+                <li>玩家可在“数据设置”中关闭相关训练用途。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">个人信息保护</span>
+            <span class="tag">生成式 AI</span>
+            <span class="tag">训练数据治理</span>
+            <span class="tag">未成年人保护</span>
+            <span class="tag">游戏内 AI 助手</span>
+          </div>
+        </section>
+
+        <section id="dataflow">
+          <h3><span class="section-no">02</span>数据流与个人信息字段</h3>
+          <p class="lead">
+            评估重点不是抽象讨论“是否合规”，而是先拆清楚数据从玩家客户端进入功能、模型、审核、日志和客服系统的路径。
+          </p>
+          <div class="flow" aria-label="数据流示意">
+            <div class="flow-item"><b>聊天列表入口</b><span>玩家进入帕姆帮帮并输入问题</span></div>
+            <div class="flow-item"><b>账号资格校验</b><span>UID、开拓等级、任务状态、登录状态</span></div>
+            <div class="flow-item"><b>场景意图识别</b><span>泛对话、养成方案、星海导航、奖励</span></div>
+            <div class="flow-item"><b>游戏上下文</b><span>角色持有、材料、光锥、遗器、进度</span></div>
+            <div class="flow-item"><b>AI 生成回复</b><span>生成帕姆回复、养成建议或拒答提示</span></div>
+            <div class="flow-item"><b>分析/训练/反馈</b><span>内容数据治理、问题反馈、日志审计</span></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 17%">数据类型</th>
+                <th style="width: 24%">示例字段</th>
+                <th style="width: 23%">处理目的</th>
+                <th style="width: 18%">风险判断</th>
+                <th style="width: 18%">建议控制</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>账号与资格信息</td>
+                <td>UID、账号 ID、开拓等级、任务完成状态、登录状态</td>
+                <td>判断是否可使用帕姆帮帮，实现入口和奖励功能</td>
+                <td><span class="risk mid">中</span></td>
+                <td>与模型调用分层，模型侧仅接收必要标签</td>
+              </tr>
+              <tr>
+                <td>游戏上下文</td>
+                <td>角色持有情况、养成材料、光锥/遗器配置、任务进度</td>
+                <td>生成养成建议、星海导航和场景化回复</td>
+                <td><span class="risk mid">中</span></td>
+                <td>按模块最小化调用，不传输无关完整账号数据</td>
+              </tr>
+              <tr>
+                <td>玩家输入内容</td>
+                <td>向帕姆提出的问题、养成需求、闲聊文本、反馈内容</td>
+                <td>生成回复、判断场景意图、进行内容安全审核</td>
+                <td><span class="risk high">高</span></td>
+                <td>输入提示、敏感字段识别、脱敏或拦截</td>
+              </tr>
+              <tr>
+                <td>AI 输出内容</td>
+                <td>帕姆回复、养成方案、导航建议、拒答提示</td>
+                <td>提供游戏助手服务</td>
+                <td><span class="risk high">高</span></td>
+                <td>输出前审核并保留 AI 生成标识</td>
+              </tr>
+              <tr>
+                <td>内容数据训练集</td>
+                <td>玩家输入和帕姆回复，经加密和去标识化后用于分析/训练</td>
+                <td>内容质量分析、模型优化</td>
+                <td><span class="risk high">高</span></td>
+                <td>核实匿名化标准，提供关闭、撤回和删除说明</td>
+              </tr>
+              <tr>
+                <td>日志与安全信息</td>
+                <td>IP、设备标识、异常调用、风控记录</td>
+                <td>防攻击、防滥用、纠纷排查</td>
+                <td><span class="risk mid">中</span></td>
+                <td>最短必要留存、访问控制、定期审计</td>
+              </tr>
+              <tr>
+                <td>客服/投诉信息</td>
+                <td>举报内容、处理记录、联系方式</td>
+                <td>处理投诉、纠错、删除请求</td>
+                <td><span class="risk mid">中</span></td>
+                <td>工单权限隔离，到期删除</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="pipia">
+          <h3><span class="section-no">03</span>PIPIA 触发判断</h3>
+          <p class="lead">
+            PIPIA 不是直接列“哪些数据不能收集”，而是先判断该 AI 功能是否属于高风险个人信息处理活动，再评估处理目的、方式和保护措施是否符合法律上的合法、正当、必要原则。
+          </p>
+          <div class="check-grid">
+            <div class="check-item">
+              <b>敏感个人信息</b>
+              <p><strong>为什么触发：</strong>玩家可能主动输入真实姓名、联系方式、账号密码、健康状况、情感状态、未成年人身份等信息。<br><strong>复核重点：</strong>功能是否提示玩家不要输入敏感信息，是否设置识别、脱敏、拦截和删除机制。</p>
+            </div>
+            <div class="check-item">
+              <b>自动化决策</b>
+              <p><strong>为什么触发：</strong>系统可能根据玩家账号状态、角色配置、任务进度自动生成养成建议、导航建议和差异化回复。<br><strong>复核重点：</strong>是否影响玩家资源投入或消费决策，AI 生成属性是否透明，玩家是否可关闭相关个性化或训练用途。</p>
+            </div>
+            <div class="check-item">
+              <b>模型训练用途</b>
+              <p><strong>为什么触发：</strong>提供当次回复是一项处理目的，将玩家输入和 AI 回复继续用于内容分析或模型训练，则属于更进一步的数据用途。<br><strong>复核重点：</strong>告知是否充分，关闭路径是否清晰，关闭后是否停止进入训练链路，历史数据如何处理，去标识化是否足够。</p>
+            </div>
+            <div class="check-item">
+              <b>第三方与出境</b>
+              <p><strong>为什么触发：</strong>AI 功能可能接入模型供应商、云服务、内容审核、日志分析或客服系统，数据可能离开游戏公司自有控制范围。<br><strong>复核重点：</strong>判断是委托处理、共同处理还是独立处理；若涉及境外模型或境外支持，还需判断数据出境路径。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="ai">
+          <h3><span class="section-no">04</span>AI 合规专项</h3>
+          <div class="two-col">
+            <div>
+              <p class="lead">
+                “帕姆帮帮（测试版）”由 AI 根据玩家输入和游戏场景生成回复，属于生成式 AI 应用场景。公开说明中的 AI 生成提示和数据设置关闭路径是积极设计，但训练数据治理仍是复盘重点。
+              </p>
+              <ul class="list-clean">
+                <li>不得诱导玩家透露真实身份、联系方式、账号密码或住址。</li>
+                <li>不得以角色身份给出医疗、法律、金融等专业建议。</li>
+                <li>养成建议不得过度绑定抽卡、充值或限时奖励。</li>
+                <li>截图、转发或分享到社区时，AI 标识应尽量保留。</li>
+              </ul>
+            </div>
+            <div class="callout">
+              <strong>训练数据治理重点：</strong><br>
+              复核“去标识化”是否仍可通过 UID、时间戳、设备、语义内容等重新关联特定玩家；关闭训练用途后，需明确未来数据、已采集数据和已进入训练集数据的处理边界。
+            </div>
+          </div>
+        </section>
+
+        <section id="minor">
+          <h3><span class="section-no">05</span>未成年人保护专项控制</h3>
+          <div class="timeline">
+            <div class="timeline-row">
+              <b>默认策略</b>
+              <p>未成年人账号默认关闭内容数据用于模型训练，不主动推送长时段陪伴式对话。</p>
+            </div>
+            <div class="timeline-row">
+              <b>内容策略</b>
+              <p>养成建议避免与充值、抽卡、限时奖励形成强绑定，对账号交易、绕过防沉迷等内容严格拒答。</p>
+            </div>
+            <div class="timeline-row">
+              <b>监护人权利</b>
+              <p>提供查询、删除、投诉、关闭功能的清晰路径，未成年人相关请求进入单独处理 SOP。</p>
+            </div>
+            <div class="timeline-row">
+              <b>审计留痕</b>
+              <p>儿童个人信息处理应保留更严格的权限审批、访问记录、操作日志和删除记录。留痕不是为了扩大数据保存，而是为了证明“谁在何时、基于什么原因、处理了哪些未成年人相关数据”，便于内部审计、监护人请求处理和监管问询时复盘。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="action">
+          <h3><span class="section-no">06</span>上线/复盘整改清单</h3>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 8%">序号</th>
+                <th style="width: 31%">整改项</th>
+                <th style="width: 12%">优先级</th>
+                <th style="width: 20%">责任团队</th>
+                <th style="width: 29%">验收标准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>补充或更新帕姆帮帮专项 PIPIA</td><td><span class="risk high">P0</span></td><td>法务/隐私合规/产品</td><td>覆盖对话数据、训练数据、未成年人和第三方处理风险</td></tr>
+              <tr><td>2</td><td>复核 AI 生成内容标识</td><td><span class="risk high">P0</span></td><td>产品/客户端/法务</td><td>游戏内对话、截图分享、社区传播均能识别为 AI 生成内容</td></tr>
+              <tr><td>3</td><td>明确训练数据授权与关闭机制</td><td><span class="risk high">P0</span></td><td>法务/产品/算法</td><td>数据设置路径清晰，关闭后生效范围和历史数据规则明确</td></tr>
+              <tr><td>4</td><td>核实去标识化/匿名化标准</td><td><span class="risk high">P0</span></td><td>安全/算法/法务</td><td>形成技术说明，确认无法重新识别或按个人信息继续管理</td></tr>
+              <tr><td>5</td><td>完成内容安全红队测试</td><td><span class="risk high">P0</span></td><td>算法/内容安全</td><td>覆盖违规内容、消费诱导、账号安全、未成年人和专业建议</td></tr>
+              <tr><td>6</td><td>建立敏感信息识别与脱敏规则</td><td><span class="risk high">P0</span></td><td>安全/算法/产品</td><td>对手机号、身份证号、住址、账号密码、验证码等内容提示或拦截</td></tr>
+              <tr><td>7</td><td>设置未成年人差异化策略</td><td><span class="risk mid">P1</span></td><td>产品/法务/未保团队</td><td>未成年人账号默认适用更严格训练、对话和消费提示策略</td></tr>
+              <tr><td>8</td><td>梳理模型/云服务供应商合规文件</td><td><span class="risk mid">P1</span></td><td>法务/采购/安全</td><td>合同包含委托处理、保密、安全、留存、删除、审计和事件通知条款</td></tr>
+              <tr><td>9</td><td>设置日志留存和权限控制</td><td><span class="risk mid">P1</span></td><td>安全/服务端</td><td>最短必要留存、分级授权、访问审计、到期删除</td></tr>
+              <tr><td>10</td><td>固化反馈、纠错和下线复盘 SOP</td><td><span class="risk mid">P1</span></td><td>客服/运营/法务</td><td>支持问题反馈、删除请求、纠错、版本复盘和再上线评审</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="project-break" id="aigc-overview">
+          <h3>项目二：AIGC 二创工坊 AI 合规评估</h3>
+          <p>
+            本案例为模拟新功能，不代表《崩坏：星穹铁道》已上线该功能。设定基于二次元玩家常见的头像、壁纸、表情包、角色祝福语和米游社配图需求，用于展示生成式 AI 功能上线前的合规评估方法。
+          </p>
+        </section>
+
+        <section id="aigc-scenario">
+          <h3><span class="section-no">01</span>功能设定与评估结论</h3>
+          <p class="lead">
+            “AIGC 二创工坊”允许玩家选择《崩坏：星穹铁道》角色、场景或游戏截图，输入简短描述后生成角色主题头像、手机壁纸、表情包、生日贺图、纪念票风格图片或发帖文案。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>建议结论：</strong>可作为模拟新功能进入灰度测试，但上线前应完成生成式 AI 服务合规评估、生成合成内容标识方案、UGC 内容审核、IP/二创边界控制和未成年人保护策略。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>功能核心不再是 AI 对话，而是图文生成和分享传播。</li>
+                <li>重点风险从“对话数据训练”转为“生成内容标识、二创边界和 UGC 审核”。</li>
+                <li>默认仅允许个人非商业分享，不开放商用授权或去水印导出。</li>
+                <li>生成内容不得冒充官方公告、活动海报或客服通知。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">AIGC 图片生成</span>
+            <span class="tag">二创生态</span>
+            <span class="tag">生成内容标识</span>
+            <span class="tag">水印方案</span>
+            <span class="tag">UGC 审核</span>
+          </div>
+        </section>
+
+        <section id="aigc-flow">
+          <h3><span class="section-no">02</span>功能链路与数据边界</h3>
+          <p class="lead">
+            第二项刻意避开第一项的 AI 对话链路，重点拆解“输入素材/提示词 → 生成图文 → 审核标识 → 导出分享”的传播链路。
+          </p>
+          <div class="flow" aria-label="AIGC 二创工坊链路">
+            <div class="flow-item"><b>选择素材</b><span>角色、场景、截图、模板</span></div>
+            <div class="flow-item"><b>输入 Prompt</b><span>祝福语、风格词、表情包文案</span></div>
+            <div class="flow-item"><b>输入审核</b><span>违规、侵权、导流、敏感词</span></div>
+            <div class="flow-item"><b>AI 生成</b><span>头像、壁纸、贺图、文案</span></div>
+            <div class="flow-item"><b>输出审核</b><span>内容安全、角色形象、版权边界</span></div>
+            <div class="flow-item"><b>标识分享</b><span>水印、隐式标识、举报入口</span></div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%">数据/内容类型</th>
+                <th style="width: 26%">示例</th>
+                <th style="width: 24%">处理目的</th>
+                <th style="width: 16%">风险</th>
+                <th style="width: 16%">最小必要控制</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>账号基础信息</td><td>UID、登录状态、年龄/未成年人状态</td><td>判断使用资格、适用未成年人策略</td><td><span class="risk mid">中</span></td><td>不进入生成模型，仅用于权限判断</td></tr>
+              <tr><td>游戏素材选择</td><td>角色、场景、官方模板、玩家截图</td><td>生成角色主题图文</td><td><span class="risk mid">中</span></td><td>限制为官方授权素材或玩家自有截图</td></tr>
+              <tr><td>玩家 Prompt</td><td>风格描述、祝福语、表情包文字</td><td>生成图片和文案</td><td><span class="risk high">高</span></td><td>输入审核、敏感词拦截、禁止外部导流</td></tr>
+              <tr><td>AI 生成内容</td><td>头像、壁纸、贺图、发帖文案</td><td>提供 AIGC 二创体验</td><td><span class="risk high">高</span></td><td>输出审核、标识、水印、举报入口</td></tr>
+              <tr><td>分享传播信息</td><td>导出图片、米游社发帖、分享链接</td><td>玩家分享和社区互动</td><td><span class="risk high">高</span></td><td>保留 AI 标识，禁止去水印和冒充官方</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="aigc-assessment">
+          <h3><span class="section-no">03</span>AI 合规评估表</h3>
+          <p class="lead">
+            本表用于对照生成式 AI、深度合成、生成合成内容标识和安全治理要求，将法规则项转成产品上线前可执行检查点。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%">评估维度</th>
+                <th style="width: 25%">适用规则关注点</th>
+                <th style="width: 28%">二创工坊风险</th>
+                <th style="width: 29%">建议措施</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>功能定性</td>
+                <td>根据用户提示生成图片/文案，属于生成式 AI 应用场景</td>
+                <td>用户可能误以为生成内容代表官方设定、官方活动或官方承诺</td>
+                <td>入口说明“AI 生成二创内容，不代表官方剧情/公告”；活动、奖励、抽卡信息不得由 AI 自由生成</td>
+              </tr>
+              <tr>
+                <td>输入内容审核</td>
+                <td>服务提供者应采取措施防止生成违法和不良信息</td>
+                <td>Prompt 可能包含辱骂、色情擦边、政治敏感、诈骗导流、第三方 IP 或真人肖像</td>
+                <td>设置输入审核、禁用词库、第三方 IP/真人姓名拦截、外链和联系方式拦截</td>
+              </tr>
+              <tr>
+                <td>输出内容审核</td>
+                <td>生成内容应符合法律法规和公序良俗，不侵害他人合法权益</td>
+                <td>可能生成不当角色形象、擦边图、暴力血腥、误导性官方海报或侵权素材</td>
+                <td>输出前进行机审+抽样人工复核；高风险模板禁用；涉未成年人账号适用更严格阈值</td>
+              </tr>
+              <tr>
+                <td>生成内容标识</td>
+                <td>AI 生成合成内容应按规则添加显式或隐式标识，便于公众识别</td>
+                <td>头像、壁纸、贺图被截图转发后，可能脱离原平台语境，被误认为官方原图或官方物料</td>
+                <td>导出图默认加入显式水印；文件内写入隐式标识/元数据；分享页保留“AI 生成”标签</td>
+              </tr>
+              <tr>
+                <td>IP 与二创边界</td>
+                <td>不得侵害知识产权、肖像权、名誉权等合法权益</td>
+                <td>玩家可能要求生成其他游戏/动漫 IP 融合图、真人同人图、商用海报或去水印版本</td>
+                <td>仅开放官方授权素材和玩家自有截图；禁止第三方 IP、真人肖像、商用导出和去水印下载</td>
+              </tr>
+              <tr>
+                <td>用户权利与投诉</td>
+                <td>应建立投诉举报、纠错和处置机制</td>
+                <td>生成内容可能冒犯玩家、引发角色厨争议或被用于社区攻击</td>
+                <td>每张生成图提供举报 ID；支持删除、撤回分享、申诉和违规样本回流</td>
+              </tr>
+              <tr>
+                <td>未成年人保护</td>
+                <td>对未成年人用户应采取更严格保护措施</td>
+                <td>未成年人可能生成擦边表情包、导流交易图、诱导分享或打赏内容</td>
+                <td>未成年人账号禁用高风险风格词、外链导流、交易文案和商用导出；默认保守审核阈值</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="aigc-watermark">
+          <h3><span class="section-no">04</span>生成标识与水印方案</h3>
+          <p class="lead">
+            水印可以解决“可识别”和“防误认”的一部分问题，但不能替代内容审核、IP 边界和投诉处置。建议采用显式水印、隐式标识和平台标签的组合方案。
+          </p>
+          <div class="two-col">
+            <div class="watermark-demo">
+              <b>开拓者纪念票 · AIGC 二创示例</b>
+              <span>生成图片右下角固定展示“AI 生成 · 非官方原图 · 仅供个人非商业分享”。</span>
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li><strong>显式水印：</strong>导出图片固定添加“AI 生成”“非官方原图”“仅供个人非商业分享”等字样。</li>
+                <li><strong>隐式标识：</strong>在图片元数据中写入生成工具、生成时间和内容 ID，便于平台识别和追溯。</li>
+                <li><strong>分享保留：</strong>分享到米游社或外部平台时，页面标签和图片水印均应保留。</li>
+                <li><strong>禁止去水印：</strong>不提供去水印下载、商用授权导出或“官方物料风格”模板。</li>
+                <li><strong>举报追踪：</strong>每张图绑定生成内容 ID，支持用户举报、撤回分享和违规样本复盘。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="aigc-action">
+          <h3><span class="section-no">05</span>上线前 Checklist</h3>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 8%">序号</th>
+                <th style="width: 30%">检查项</th>
+                <th style="width: 13%">优先级</th>
+                <th style="width: 21%">责任团队</th>
+                <th style="width: 28%">验收标准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>完成功能定性与生成式 AI 合规评估</td><td><span class="risk high">P0</span></td><td>法务/产品/算法</td><td>明确功能边界、用户告知、禁止生成范围和责任分工</td></tr>
+              <tr><td>2</td><td>建立输入和输出内容审核策略</td><td><span class="risk high">P0</span></td><td>内容安全/算法</td><td>覆盖违规、擦边、诈骗导流、第三方 IP、真人肖像和官方冒充</td></tr>
+              <tr><td>3</td><td>落地 AI 生成内容标识与水印</td><td><span class="risk high">P0</span></td><td>产品/客户端/法务</td><td>导出图、分享页、元数据均能识别为 AI 生成内容</td></tr>
+              <tr><td>4</td><td>明确 IP 与二创使用边界</td><td><span class="risk high">P0</span></td><td>法务/IP/运营</td><td>仅允许个人非商业分享，禁止商用、去水印、第三方 IP 和真人肖像生成</td></tr>
+              <tr><td>5</td><td>设置未成年人保护策略</td><td><span class="risk mid">P1</span></td><td>产品/法务/未保团队</td><td>未成年人账号适用更严格审核阈值，禁用交易导流和高风险模板</td></tr>
+              <tr><td>6</td><td>建立举报、删除、撤回和样本复盘流程</td><td><span class="risk mid">P1</span></td><td>客服/运营/内容安全</td><td>每张生成图可追踪，投诉后可定位、处置和回流优化审核规则</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="project-break" id="sdk-overview">
+          <h3>项目三：境内第三方服务与 SDK 接入合规评估</h3>
+          <p>
+            本案例模拟《崩坏：星穹铁道》客户端或运营后台接入境内客服系统、境内运营分析/埋点统计服务（自研或第三方）、境内广告 SDK、崩溃日志 SDK 和内容安全/风控服务，输出第三方处理关系、SDK 字段台账、最小必要审查和境外访问排除检查。
+          </p>
+        </section>
+
+        <section id="sdk-scenario">
+          <h3><span class="section-no">01</span>场景设定与初步结论</h3>
+          <p class="lead">
+            本项目聚焦境内法务方向：第三方服务与 SDK 接入本身并不等于数据出境，核心是先完成境内第三方接入合规审查，再保留一项“是否存在境外接收、境外远程访问或境外关联方处理”的排除性检查。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>建议结论：</strong>可按境内第三方服务与 SDK 接入流程进行评估。重点不是安全评估/标准合同路径，而是第三方处理关系、采集字段最小必要、SDK 超范围采集检测、用户告知、委托处理协议、二次共享限制和权限/日志留存控制。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>境内第三方 SDK 仍需审查收集字段、调用权限、处理目的和共享范围。</li>
+                <li>同一 SDK 可能同时存在委托处理、独立处理或共同处理风险，需要逐项判断。</li>
+                <li>若未发现境外服务器接收、境外远程访问或境外关联方处理，可记录为“不进入数据出境路径”。</li>
+                <li>上线前应形成 SDK 清单、字段台账、技术检测记录、合同条款和隐私政策更新记录。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">境内第三方</span>
+            <span class="tag">SDK 尽调</span>
+            <span class="tag">最小必要</span>
+            <span class="tag">委托处理</span>
+            <span class="tag">供应商尽调</span>
+          </div>
+        </section>
+
+        <section id="sdk-inventory">
+          <h3><span class="section-no">02</span>SDK 风险台账</h3>
+          <p class="lead">
+            先建台账，再做判断。每个 SDK 都要看数据字段、触发时机、处理目的、权限调用、第三方处理关系、是否二次共享和留存期限。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 16%">场景</th>
+                <th style="width: 25%">可能涉及数据</th>
+                <th style="width: 18%">第三方关系</th>
+                <th style="width: 18%">境内合规风险</th>
+                <th style="width: 23%">建议控制</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>境内客服系统</td>
+                <td>UID、昵称、工单内容、联系方式、充值/订单问题、截图、聊天记录</td>
+                <td>通常为委托处理；若客服平台独立复用数据，需进一步判断</td>
+                <td><span class="risk high">高</span> 工单可能包含敏感信息、支付争议、账号安全和未成年人请求</td>
+                <td>限制字段；敏感内容脱敏；工单权限分级；合同约定保密、删除、审计和事件通知</td>
+              </tr>
+              <tr>
+                <td>境内运营分析/埋点统计服务（自研或第三方）</td>
+                <td>设备标识、行为事件、登录/活跃、版本、地区、渠道、广告标识</td>
+                <td>多为委托处理；若工具方自有分析或画像，可能转为独立处理</td>
+                <td><span class="risk high">高</span> 埋点过细可能形成玩家行为画像或超出告知范围</td>
+                <td>关闭非必要字段；避免上传完整 UID 与精细画像；埋点事件按目的分级审批</td>
+              </tr>
+              <tr>
+                <td>境内广告 SDK</td>
+                <td>设备标识、广告标识、IP、点击/曝光、渠道、转化事件</td>
+                <td>常见独立处理或共同处理，需要重点审查</td>
+                <td><span class="risk high">高</span> 可能涉及个性化广告、跨平台追踪和二次共享</td>
+                <td>禁止默认开启个性化广告；公示 SDK 清单；审查二次共享和用户关闭路径</td>
+              </tr>
+              <tr>
+                <td>崩溃日志 SDK</td>
+                <td>设备型号、系统版本、IP、崩溃堆栈、日志、可能包含账号标识</td>
+                <td>通常为委托处理</td>
+                <td><span class="risk mid">中</span> 日志可能夹带账号、聊天、截图或本地路径等非必要信息</td>
+                <td>日志脱敏；禁止采集聊天/实名/支付信息；设置最短留存和访问审计</td>
+              </tr>
+              <tr>
+                <td>内容安全/风控服务</td>
+                <td>聊天文本、举报内容、异常行为、设备/IP、封禁记录</td>
+                <td>通常为委托处理；若供应商自建黑产库需审查复用边界</td>
+                <td><span class="risk high">高</span> 涉及内容审核、账号处罚和用户权益影响</td>
+                <td>明确审核规则；保留申诉路径；限制供应商复用；处罚类决策需人工复核机制</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="sdk-tree">
+          <h3><span class="section-no">03</span>境外访问排除检查</h3>
+          <p class="lead">
+            本项目主线是境内第三方接入，但仍需保留出境排查记录。排除检查的目标是证明：本次 SDK 接入未发现境外服务器接收、境外远程访问、境外客服处理或境外关联方处理个人信息。
+          </p>
+          <div class="decision-tree">
+            <div class="decision-step">
+              <b>Step 1</b>
+              <p><strong>确认主体与服务器位置。</strong>供应商是否为境内主体，数据接收服务器、备份服务器、日志服务器和客服系统是否均位于中国境内。</p>
+            </div>
+            <div class="decision-step">
+              <b>Step 2</b>
+              <p><strong>确认访问权限。</strong>是否存在境外工程师、境外客服、境外母公司/关联公司或境外供应商通过后台、工单、日志平台远程访问境内玩家个人信息。</p>
+            </div>
+            <div class="decision-step">
+              <b>Step 3</b>
+              <p><strong>确认二次共享路径。</strong>供应商是否将数据同步给境外子处理者、境外云服务、境外广告平台、境外分析工具或境外技术支持团队。</p>
+            </div>
+            <div class="decision-step">
+              <b>Step 4</b>
+              <p><strong>形成排除结论。</strong>若上述检查均为否，可记录为“本项目按境内第三方服务/SDK 接入管理，暂不进入数据出境安全评估、标准合同或认证路径”；若任一项为是，则启动数据出境专项评估。</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="sdk-path">
+          <h3><span class="section-no">04</span>第三方处理关系判断表</h3>
+          <div class="path-grid">
+            <div class="path-card">
+              <b>委托处理</b>
+              <p>第三方仅按游戏公司指令处理数据，不自行决定处理目的和方式。重点签署委托处理协议，约定保密、安全、删除、审计、事件通知和禁止转委托。</p>
+            </div>
+            <div class="path-card">
+              <b>共同处理</b>
+              <p>游戏公司与第三方共同决定处理目的和方式。重点明确各方责任、用户权利响应分工、告知内容和发生争议时的责任边界。</p>
+            </div>
+            <div class="path-card">
+              <b>独立处理</b>
+              <p>第三方独立决定数据用途，例如自建画像、广告投放或跨平台归因。重点审查是否需要单独告知/同意、是否构成第三方提供和是否允许接入。</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 20%">模拟场景</th>
+                <th style="width: 24%">判断重点</th>
+                <th style="width: 20%">处理关系</th>
+                <th style="width: 36%">落地建议</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>境内客服系统处理玩家工单</td>
+                <td>客服系统是否仅按游戏公司指令处理工单，是否复用数据训练自有模型</td>
+                <td>通常委托处理</td>
+                <td>签署委托处理协议；设置工单脱敏、权限分级、留存期限和监护人请求处理流程</td>
+              </tr>
+              <tr>
+                <td>境内运营分析/埋点统计服务接收埋点</td>
+                <td>工具方是否仅提供分析能力，是否自建跨客户画像或复用玩家行为数据</td>
+                <td>委托处理或独立处理</td>
+                <td>限定埋点字段；禁止跨客户复用；埋点需求走审批；敏感事件单独评审</td>
+              </tr>
+              <tr>
+                <td>境内广告 SDK 投放与归因</td>
+                <td>广告平台是否独立决定处理目的，是否二次共享</td>
+                <td>多为独立处理或共同处理</td>
+                <td>明确共同/独立处理关系；更新隐私政策和 SDK 清单；提供个性化广告关闭路径</td>
+              </tr>
+              <tr>
+                <td>崩溃日志 SDK 排查客户端问题</td>
+                <td>日志是否夹带账号、聊天、支付、实名或截图信息</td>
+                <td>通常委托处理</td>
+                <td>日志脱敏、临时授权、最短留存、访问审批和操作留痕</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="sdk-checklist">
+          <h3><span class="section-no">05</span>第三方 SDK 尽调 Checklist</h3>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 8%">序号</th>
+                <th style="width: 29%">检查项</th>
+                <th style="width: 20%">责任团队</th>
+                <th style="width: 43%">验收标准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>确认 SDK 名称、版本、主体和服务器位置</td><td>产品/技术/法务</td><td>形成 SDK 清单，列明境内接收方、服务器位置、子处理者和联系方式</td></tr>
+              <tr><td>2</td><td>梳理采集字段和触发时机</td><td>技术/安全</td><td>通过代码审查、抓包或检测工具确认字段，不仅依赖供应商说明</td></tr>
+              <tr><td>3</td><td>判断第三方处理关系</td><td>法务/采购</td><td>区分委托处理、共同处理、独立处理，并匹配合同条款和告知方式</td></tr>
+              <tr><td>4</td><td>完成境外访问排除检查</td><td>法务/安全</td><td>确认无境外接收、境外远程访问、境外客服或境外关联方处理；如存在则启动数据出境专项评估</td></tr>
+              <tr><td>5</td><td>审查最小必要和超范围采集</td><td>技术/安全/法务</td><td>字段、权限、触发时机均与功能目的匹配，不采集实名、支付、聊天等非必要信息</td></tr>
+              <tr><td>6</td><td>更新用户告知和隐私政策</td><td>法务/产品</td><td>公示 SDK 名称、用途、字段、接收方、共享情况和用户权利路径</td></tr>
+              <tr><td>7</td><td>设置技术和合同控制</td><td>安全/采购/法务</td><td>落实最小必要、脱敏、留存期限、访问控制、删除、审计、安全事件通知和禁止二次共享</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="project-break" id="toolkit-overview">
+          <h3>项目四：游戏产品数据合规体系落地工具包</h3>
+          <p>
+            本项目把前三个案例中反复出现的审查动作沉淀为团队可复用材料，模拟为《崩坏：星穹铁道》版本迭代、新功能上线和日常运营提供一套数据合规落地工具包。
+          </p>
+        </section>
+
+        <section id="toolkit-scenario">
+          <h3><span class="section-no">01</span>目标与适用结论</h3>
+          <p class="lead">
+            体系工具包的价值不在于一次性写完法律分析，而是让产品、研发、运营、安全和法务在每次功能迭代时都能按同一套材料提交、评审、留痕和复盘。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>建议结论：</strong>可建立“处理活动台账 + 字段分级 + 上线评审流程 + 工单模板 + 未成年人专项检查”的轻量化合规工具包。对于 AI 功能、SDK 接入、客服工单、活动运营等高频场景，先用模板完成初筛；触发敏感个人信息、未成年人、自动化决策、第三方共享或训练用途时，再升级为专项评估。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>解决产品需求进入太晚、法务只能事后补救的问题。</li>
+                <li>让“字段、目的、触发时机、第三方、留存期限”成为每次评审的固定问题。</li>
+                <li>用台账和工单记录审查过程，方便后续合规审计和监管问询。</li>
+                <li>把未成年人、AI、SDK 等高风险情形设置为自动升级项。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">体系落地</span>
+            <span class="tag">处理活动台账</span>
+            <span class="tag">字段分级</span>
+            <span class="tag">上线评审</span>
+            <span class="tag">审计留痕</span>
+          </div>
+        </section>
+
+        <section id="toolkit-ledger">
+          <h3><span class="section-no">02</span>个人信息处理活动台账</h3>
+          <p class="lead">
+            台账的作用是把“哪些业务在处理哪些个人信息”固定下来。面试时可以把它解释为法务团队管理数据合规风险的底表，后续 PIPIA、隐私政策更新、SDK 审查和审计都可以从这里抽取材料。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 18%">处理活动</th>
+                <th style="width: 22%">游戏业务场景</th>
+                <th style="width: 25%">可能涉及信息</th>
+                <th style="width: 20%">目的与必要性</th>
+                <th style="width: 15%">管理动作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>账号注册与实名校验</td>
+                <td>登录、实名制、防沉迷、账号安全</td>
+                <td>账号标识、实名校验结果、年龄段、防沉迷状态</td>
+                <td>满足实名注册、防沉迷和账号安全要求</td>
+                <td>单独建档；权限隔离；最短留存</td>
+              </tr>
+              <tr>
+                <td>客服与争议处理</td>
+                <td>充值异常、账号找回、举报申诉、Bug 反馈</td>
+                <td>UID、联系方式、订单信息、截图、工单文本、聊天上下文</td>
+                <td>定位问题、处理请求、维护用户权益</td>
+                <td>工单脱敏；分级授权；操作留痕</td>
+              </tr>
+              <tr>
+                <td>玩法与运营分析</td>
+                <td>活动转化、入口点击、任务完成、功能留存</td>
+                <td>行为事件、时间戳、版本、设备类型、渠道、区服</td>
+                <td>评估功能效果、优化体验和资源投放</td>
+                <td>埋点审批；禁止超范围画像</td>
+              </tr>
+              <tr>
+                <td>AI 互动与生成内容</td>
+                <td>帕姆帮帮、AIGC 二创、智能客服</td>
+                <td>用户输入、AI 输出、上下文、反馈、内容安全标签</td>
+                <td>提供互动服务、内容审核、效果优化</td>
+                <td>PIPIA 初筛；训练用途开关；标识留存</td>
+              </tr>
+              <tr>
+                <td>第三方服务与 SDK</td>
+                <td>客服系统、崩溃日志、内容安全、广告归因</td>
+                <td>设备信息、日志、IP、事件数据、工单数据</td>
+                <td>实现必要技术服务或运营服务</td>
+                <td>SDK 清单；合同审查；境外访问排除</td>
+              </tr>
+              <tr>
+                <td>安全风控与反作弊</td>
+                <td>异常登录、外挂识别、违规处罚、黑产防控</td>
+                <td>设备指纹、IP、行为序列、处罚记录、举报内容</td>
+                <td>保障账号安全和游戏公平</td>
+                <td>规则透明；申诉路径；人工复核</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="toolkit-field">
+          <h3><span class="section-no">03</span>个人信息字段分级表</h3>
+          <p class="lead">
+            字段分级不是为了把信息“贴标签”而已，而是决定审批层级、告知方式、留存期限、访问权限和是否触发专项评估。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 12%">等级</th>
+                <th style="width: 22%">字段类型</th>
+                <th style="width: 28%">游戏场景示例</th>
+                <th style="width: 18%">风险关注</th>
+                <th style="width: 20%">控制要求</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>L1 基础业务信息</td>
+                <td>昵称、UID、区服、角色等级、公开头像</td>
+                <td>账号展示、好友列表、排行榜或客服定位</td>
+                <td><span class="risk low">低</span> 主要关注展示范围和用户认知</td>
+                <td>按场景告知；避免和实名、联系方式直接绑定展示</td>
+              </tr>
+              <tr>
+                <td>L2 技术与日志信息</td>
+                <td>设备型号、系统版本、IP、崩溃日志、网络状态</td>
+                <td>排查闪退、性能优化、安全风控</td>
+                <td><span class="risk mid">中</span> 日志夹带非必要信息或默认长期留存</td>
+                <td>日志脱敏；限制留存；访问审批；不采集聊天、支付、实名内容</td>
+              </tr>
+              <tr>
+                <td>L3 行为与上下文信息</td>
+                <td>活动点击、任务进度、角色持有、养成偏好、Prompt 输入</td>
+                <td>活动运营、帕姆帮帮、AIGC 二创、功能推荐</td>
+                <td><span class="risk high">高</span> 可能形成玩家画像或用于自动化决策</td>
+                <td>目的限定；埋点审批；画像/推荐单独评估；提供合理退出路径</td>
+              </tr>
+              <tr>
+                <td>L4 敏感或特殊保护信息</td>
+                <td>实名校验、未成年人状态、联系方式、订单争议、面部识别信息</td>
+                <td>防沉迷、客服争议、账号找回、监护人请求</td>
+                <td><span class="risk high">高</span> 可能触发单独同意、PIPIA 或未成年人专项规则</td>
+                <td>最小必要；严格授权；专项评估；单独留痕；删除/撤回路径清晰</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="toolkit-workflow">
+          <h3><span class="section-no">04</span>新功能上线合规评审流程</h3>
+          <p class="lead">
+            这部分可以向面试官展示你理解“合规落地”不是只看法律条文，而是要嵌入产品开发节奏，让风险在需求、设计、开发、灰度和复盘阶段都有负责人。
+          </p>
+          <div class="flow" aria-label="新功能上线合规评审流程">
+            <div class="flow-item"><b>需求提交</b><span>产品说明功能目标、用户路径和预计上线时间</span></div>
+            <div class="flow-item"><b>数据拆解</b><span>列明字段、触发时机、第三方、留存期限</span></div>
+            <div class="flow-item"><b>风险初筛</b><span>识别敏感信息、未成年人、AI、SDK 和出境因素</span></div>
+            <div class="flow-item"><b>法务评审</b><span>匹配告知、同意、PIPIA、合同和用户权利路径</span></div>
+            <div class="flow-item"><b>上线控制</b><span>灰度范围、开关策略、异常回滚和投诉入口</span></div>
+            <div class="flow-item"><b>复盘留痕</b><span>记录评审结论、整改项、验收截图和责任人</span></div>
+          </div>
+        </section>
+
+        <section id="toolkit-ticket">
+          <h3><span class="section-no">05</span>版本迭代数据合规工单模板</h3>
+          <p class="lead">
+            工单模板用于把合规问题前置到产品需求阶段。它的重点是让提交人必须回答“为什么收、收什么、什么时候收、给谁、留多久、怎么让用户知道”。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 24%">工单字段</th>
+                <th style="width: 36%">填写示例</th>
+                <th style="width: 40%">法务审查意义</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>功能名称与版本</td><td>4.x 版本新增“角色养成建议”入口</td><td>确定评审对象、上线节点和后续复盘范围</td></tr>
+              <tr><td>业务目的</td><td>帮助玩家理解角色培养路径，提升功能使用体验</td><td>判断个人信息处理是否具备明确、合理、必要的目的</td></tr>
+              <tr><td>采集字段</td><td>UID、角色持有、等级、材料库存、用户输入问题</td><td>逐项判断是否最小必要，是否涉及敏感或高风险信息</td></tr>
+              <tr><td>触发时机</td><td>玩家主动点击入口并提交问题后调用，不在登录时默认采集</td><td>防止未使用功能即默认收集，降低过度采集风险</td></tr>
+              <tr><td>第三方或 SDK</td><td>是否调用模型供应商、客服系统、日志平台或内容安全服务</td><td>判断委托处理、共同处理、独立处理和境外访问排除要求</td></tr>
+              <tr><td>AI/自动化因素</td><td>是否生成内容、是否对用户进行画像或自动化推荐</td><td>判断是否进入 AI 合规评估、生成内容标识或自动化决策专项</td></tr>
+              <tr><td>未成年人影响</td><td>未成年人账号是否可用，是否涉及监护人请求或防沉迷状态</td><td>判断是否需要更严格审核、监护人同意或功能限制</td></tr>
+              <tr><td>留存与删除</td><td>对话日志保留 30 天用于问题排查，训练样本去标识化后入库</td><td>核查保存期限、删除机制、训练用途和审计留痕</td></tr>
+              <tr><td>用户告知与选择</td><td>入口提示 AI 生成内容，数据设置页提供训练用途关闭开关</td><td>判断隐私政策、弹窗提示、单独同意和用户权利路径是否充分</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="toolkit-minor">
+          <h3><span class="section-no">06</span>未成年人个人信息专项检查表</h3>
+          <p class="lead">
+            游戏产品天然涉及实名制、防沉迷和监护人请求，因此未成年人个人信息应作为固定专项，而不是等到出现投诉后再补充审查。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 8%">序号</th>
+                <th style="width: 30%">检查项</th>
+                <th style="width: 22%">适用场景</th>
+                <th style="width: 40%">验收标准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>识别是否处理不满十四周岁未成年人个人信息</td><td>实名、防沉迷、客服、活动报名</td><td>形成未成年人字段清单，标明监护人同意、告知和删除路径</td></tr>
+              <tr><td>2</td><td>限制未成年人账号的高风险 AI 与 UGC 功能</td><td>AI 助手、AIGC 二创、社区分享</td><td>未成年人账号适用更严格内容审核、模板限制和外链/交易导流拦截</td></tr>
+              <tr><td>3</td><td>客服工单识别监护人请求</td><td>退款、账号找回、个人信息查阅/删除</td><td>提供身份核验、处理时限、内部升级和结果留痕机制</td></tr>
+              <tr><td>4</td><td>防沉迷数据最小必要</td><td>实名状态、年龄段、在线时长、充值限制</td><td>仅用于实名、防沉迷和监管要求，不向运营画像或广告目的扩展</td></tr>
+              <tr><td>5</td><td>未成年人数据权限和审计</td><td>客服后台、风控后台、数据分析后台</td><td>仅授权必要岗位访问，查询、导出、修改和删除均保留日志</td></tr>
+              <tr><td>6</td><td>投诉和安全事件响应</td><td>信息泄露、误封、异常扣费、内容伤害</td><td>设置专项响应流程，明确法务、安全、客服和运营的责任分工</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="sources">
+          <h3>主要参考依据</h3>
+          <ul class="source-list">
+            <li><a href="https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html">《中华人民共和国个人信息保护法》</a></li>
+            <li><a href="https://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/202310/t20231025_1087333.html">《未成年人网络保护条例》</a></li>
+            <li><a href="https://www.gov.cn/gongbao/2024/issue_11646/202410/content_6980863.html">《网络数据安全管理条例》</a></li>
+            <li><a href="https://www.cac.gov.cn/2024-03/22/c_1712776611775634.htm">《促进和规范数据跨境流动规定》</a></li>
+            <li><a href="https://www.cac.gov.cn/2022-07/07/c_1658811536396503.htm">《数据出境安全评估办法》</a></li>
+            <li><a href="https://www.cac.gov.cn/2023-02/24/c_1678884830036813.htm">《个人信息出境标准合同办法》</a></li>
+            <li><a href="https://www.cac.gov.cn/2025-10/17/c_1762449728720008.htm">《个人信息出境认证办法》</a></li>
+            <li><a href="https://www.cac.gov.cn/2023-07/13/c_1690898326795531.htm">《生成式人工智能服务管理暂行办法》</a></li>
+            <li><a href="https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm">《人工智能生成合成内容标识办法》</a></li>
+            <li><a href="https://www.cac.gov.cn/2022-12/11/c_1672221949354811.htm">《互联网信息服务深度合成管理规定》</a></li>
+            <li><a href="https://www.cac.gov.cn/2025-02/14/c_1741233507681519.htm">《个人信息保护合规审计管理办法》</a></li>
+            <li><a href="https://www.tc260.org.cn/portal/article/2/20240909102807">TC260《人工智能安全治理框架》1.0 版</a></li>
+            <li><a href="https://bbs.mihoyo.com/sr/wiki/content/7327/detail?bbs_presentation_style=no_header">米游社《帕姆帮帮（测试版）》公开说明</a></li>
+            <li><a href="https://www.hoyolab.com/article/44925444">HoYoLAB 4.2 Version New Event Overview</a></li>
+            <li><a href="https://sr.mihoyo.com/main">《崩坏：星穹铁道》官方网站</a></li>
+            <li><a href="https://sr.mihoyo.com/terms/privacy">米哈游游戏服务隐私政策</a></li>
+            <li><a href="https://sr.mihoyo.com/terms/features">《崩坏：星穹铁道》软件权限列表</a></li>
+            <li><a href="https://www.mihoyo.com/company/privacy">米哈游儿童个人信息及隐私保护政策</a></li>
+          </ul>
+        </section>
+      </div>
+
+      <footer>
+        预览稿生成日期：2026-06-08 · 用于求职作品集讨论与修改
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
