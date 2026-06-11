@@ -630,6 +630,301 @@
       font-size: 13px;
     }
 
+    .demo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .demo-panel {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+
+    .demo-panel h4 {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font-size: 16px;
+    }
+
+    .demo-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0 0 16px;
+    }
+
+    .demo-step {
+      position: relative;
+      min-height: 72px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      background: #f9fafc;
+    }
+
+    .demo-step b {
+      display: block;
+      color: var(--blue);
+      font-size: 13px;
+    }
+
+    .demo-step span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 13px;
+    }
+
+    .form-row label,
+    .toggle-grid span {
+      color: #23314a;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .form-row input,
+    .form-row textarea,
+    .form-row select {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 10px 11px;
+      font: inherit;
+      font-size: 13px;
+      line-height: 1.5;
+      border-radius: 0;
+    }
+
+    .form-row textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    .toggle-grid {
+      display: grid;
+      gap: 9px;
+      margin: 0 0 15px;
+    }
+
+    .toggle-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .demo-toggle {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      min-height: 40px;
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .demo-toggle input {
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .demo-actions,
+    .example-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .demo-button {
+      min-height: 36px;
+      padding: 8px 12px;
+      border: 1px solid var(--blue);
+      background: var(--blue);
+      color: #fff;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .demo-button.secondary {
+      background: #fff;
+      color: var(--blue);
+    }
+
+    .demo-button:hover {
+      filter: brightness(0.97);
+    }
+
+    .report-top {
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .risk-score {
+      display: grid;
+      place-items: center;
+      min-height: 82px;
+      padding: 12px;
+      border: 1px solid currentColor;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .risk-score.high {
+      color: var(--red);
+      background: #fff1f1;
+    }
+
+    .risk-score.mid {
+      color: #8a5a00;
+      background: #fff7e5;
+    }
+
+    .risk-score.low {
+      color: var(--green);
+      background: #edf8f3;
+    }
+
+    .report-summary {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .report-summary b {
+      color: var(--ink);
+    }
+
+    .report-kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 10px 0 0;
+    }
+
+    .report-kpi {
+      padding: 8px 9px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report-kpi strong {
+      display: block;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .report-block {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .report-block b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--blue);
+    }
+
+    .hit-list,
+    .material-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .hit-list li,
+    .material-list li {
+      padding: 9px 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .hit-list strong,
+    .material-list strong {
+      color: var(--ink);
+    }
+
+    .copy-note {
+      min-height: 18px;
+      margin-top: 8px;
+      color: var(--green);
+      font-size: 12px;
+    }
+
+    .report-sheet {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .report-sheet h4 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 16px;
+    }
+
+    .report-sheet .sheet-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 14px;
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .sheet-meta b {
+      color: var(--ink);
+    }
+
+    .report-sheet table {
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .code-box {
+      margin: 16px 0 0;
+      padding: 14px;
+      overflow: auto;
+      background: #101827;
+      color: #e9eef7;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
     footer {
       max-width: 1120px;
       margin: 22px auto 0;
@@ -663,7 +958,13 @@
       .summary-grid,
       .two-col,
       .check-grid,
-      .path-grid {
+      .path-grid,
+      .demo-steps,
+      .demo-grid,
+      .report-kpis,
+      .report-sheet .sheet-meta,
+      .agent-grid,
+      .toggle-options {
         grid-template-columns: 1fr;
       }
 
@@ -717,6 +1018,47 @@
       section {
         break-inside: avoid;
       }
+
+      body.print-report-only .hero,
+      body.print-report-only .summary-grid,
+      body.print-report-only .content > section:not(#screening-demo),
+      body.print-report-only footer {
+        display: none;
+      }
+
+      body.print-report-only #screening-demo {
+        border: 0;
+        padding: 0;
+      }
+
+      body.print-report-only #screening-demo > h3,
+      body.print-report-only #screening-demo > .lead,
+      body.print-report-only .demo-steps,
+      body.print-report-only .demo-panel:first-child,
+      body.print-report-only .report-block,
+      body.print-report-only .demo-actions,
+      body.print-report-only .copy-note {
+        display: none;
+      }
+
+      body.print-report-only .demo-grid {
+        display: block;
+      }
+
+      body.print-report-only .demo-panel {
+        border: 0;
+        padding: 0;
+        background: #fff;
+      }
+
+      body.print-report-only .report-top {
+        margin-bottom: 10px;
+      }
+
+      body.print-report-only .report-sheet {
+        border: 0;
+        padding: 0;
+      }
     }
   </style>
 </head>
@@ -728,7 +1070,7 @@
       <div class="meta">
         目标岗位：境内法务实习生（数据合规）<br>
         案例对象：《崩坏：星穹铁道》<br>
-        章节：01-04 数据与 AI 合规案例
+        章节：01-07 数据与 AI 合规案例
       </div>
       <div class="nav-title">章节导航</div>
       <div class="nav-tree">
@@ -781,6 +1123,34 @@
             <li><a href="#toolkit-minor">06 未成年人专项</a></li>
           </ul>
         </details>
+        <details class="nav-group" open>
+          <summary>项目五：初筛工具 Demo</summary>
+          <ul class="nav">
+            <li><a href="#screening-overview">项目说明</a></li>
+            <li><a href="#screening-scenario">01 工具定位</a></li>
+            <li><a href="#screening-demo">02 交互 Demo</a></li>
+            <li><a href="#screening-rules">03 规则库文字版</a></li>
+            <li><a href="#screening-agent">04 AI Agent 方案</a></li>
+          </ul>
+        </details>
+        <details class="nav-group" open>
+          <summary>项目六：监管简报</summary>
+          <ul class="nav">
+            <li><a href="#brief-overview">项目说明</a></li>
+            <li><a href="#brief-scenario">01 简报定位</a></li>
+            <li><a href="#brief-tracker">02 动态追踪表</a></li>
+            <li><a href="#brief-impact">03 游戏产品影响</a></li>
+            <li><a href="#brief-action">04 持续跟进行动</a></li>
+          </ul>
+        </details>
+        <details class="nav-group" open>
+          <summary>项目七：游戏理解</summary>
+          <ul class="nav">
+            <li><a href="#gamer-overview">项目说明</a></li>
+            <li><a href="#gamer-scenario">01 能力定位</a></li>
+            <li><a href="#gamer-map">02 机制理解映射</a></li>
+          </ul>
+        </details>
         <ul class="nav">
           <li><a href="#sources">主要参考依据</a></li>
         </ul>
@@ -800,14 +1170,14 @@
         </div>
         <h2>《崩坏：星穹铁道》数据与 AI 合规作品集预览</h2>
         <p>
-          包含项目一“帕姆帮帮（测试版）”公开功能复盘、项目二“AIGC 二创工坊”模拟新功能上线评估、项目三“境内第三方服务与 SDK 接入”合规评估，以及项目四“游戏产品数据合规体系落地工具包”，展示数据流拆解、PIPIA 触发判断、生成式 AI 内容安全、训练数据治理、生成内容标识、水印方案、第三方处理关系判断、SDK 尽调和跨团队合规流程设计等法务实习交付能力。
+          包含项目一“帕姆帮帮（测试版）”公开功能复盘、项目二“AIGC 二创工坊”模拟新功能上线评估、项目三“境内第三方服务与 SDK 接入”合规评估、项目四“游戏产品数据合规体系落地工具包”、项目五“AI + Python 数据合规初筛工具 Demo”、项目六“中国数据与 AI 合规监管简报”，以及项目七“游戏经历与产品理解”，展示数据流拆解、PIPIA 触发判断、生成式 AI 内容安全、训练数据治理、生成内容标识、水印方案、第三方处理关系判断、SDK 尽调、跨团队合规流程设计、合规效率工具和游戏产品理解能力。
         </p>
       </header>
 
       <div class="summary-grid" id="overview">
         <div class="metric">
-          <strong>4 项</strong>
-          <span>复盘、评估、尽调、工具包</span>
+          <strong>7 项</strong>
+          <span>评估、尽调、工具、简报、玩家理解</span>
         </div>
         <div class="metric">
           <strong>帕姆帮帮</strong>
@@ -818,8 +1188,8 @@
           <span>新功能评估与第三方接入</span>
         </div>
         <div class="metric">
-          <strong>合规工具包</strong>
-          <span>体系落地与跨团队协作</span>
+          <strong>综合能力</strong>
+          <span>工具化、监管跟踪与游戏理解</span>
         </div>
       </div>
 
@@ -838,7 +1208,7 @@
           </p>
           <div class="two-col">
             <div class="callout">
-              <strong>建议结论：</strong>已具备若干积极合规设计，但仍应按“中高风险 AI 互动功能”持续治理。尤其要复核内容数据用于模型训练、去标识化标准、未成年人账号策略和 AI 标识留存。
+              <strong>评估结论：</strong>已具备若干积极合规设计，但仍应按“中高风险 AI 互动功能”持续治理。尤其要复核内容数据用于模型训练、去标识化标准、未成年人账号策略和 AI 标识留存。
             </div>
             <div>
               <ul class="list-clean">
@@ -938,7 +1308,7 @@
         <section id="pipia">
           <h3><span class="section-no">03</span>PIPIA 触发判断</h3>
           <p class="lead">
-            PIPIA 不是直接列“哪些数据不能收集”，而是先判断该 AI 功能是否属于高风险个人信息处理活动，再评估处理目的、方式和保护措施是否符合法律上的合法、正当、必要原则。
+            PIPIA 的核心功能，是在开展可能对个人权益产生重大影响的个人信息处理活动前，对处理目的、处理方式、个人权益影响及安全风险进行系统评估，并据此形成风险控制措施和留存记录。
           </p>
           <div class="check-grid">
             <div class="check-item">
@@ -1044,7 +1414,7 @@
           </p>
           <div class="two-col">
             <div class="callout">
-              <strong>建议结论：</strong>可作为模拟新功能进入灰度测试，但上线前应完成生成式 AI 服务合规评估、生成合成内容标识方案、UGC 内容审核、IP/二创边界控制和未成年人保护策略。
+              <strong>评估结论：</strong>可作为模拟新功能进入灰度测试，但上线前应完成生成式 AI 服务合规评估、生成合成内容标识方案、UGC 内容审核、IP/二创边界控制和未成年人保护策略。
             </div>
             <div>
               <ul class="list-clean">
@@ -1213,11 +1583,11 @@
         <section id="sdk-scenario">
           <h3><span class="section-no">01</span>场景设定与初步结论</h3>
           <p class="lead">
-            本项目聚焦境内法务方向：第三方服务与 SDK 接入本身并不等于数据出境，核心是先完成境内第三方接入合规审查，再保留一项“是否存在境外接收、境外远程访问或境外关联方处理”的排除性检查。
+            本项目聚焦境内法务方向：第三方服务与 SDK 接入本身并不等于数据出境，核心是先完成境内第三方接入合规审查，再完成数据出境排除项检查。
           </p>
           <div class="two-col">
             <div class="callout">
-              <strong>建议结论：</strong>可按境内第三方服务与 SDK 接入流程进行评估。重点不是安全评估/标准合同路径，而是第三方处理关系、采集字段最小必要、SDK 超范围采集检测、用户告知、委托处理协议、二次共享限制和权限/日志留存控制。
+              <strong>评估结论：</strong>可按境内第三方服务与 SDK 接入流程进行评估。重点不是安全评估/标准合同路径，而是第三方处理关系、采集字段最小必要、SDK 超范围采集检测、用户告知、委托处理协议、二次共享限制和权限/日志留存控制。
             </div>
             <div>
               <ul class="list-clean">
@@ -1408,7 +1778,7 @@
           </p>
           <div class="two-col">
             <div class="callout">
-              <strong>建议结论：</strong>可建立“处理活动台账 + 字段分级 + 上线评审流程 + 工单模板 + 未成年人专项检查”的轻量化合规工具包。对于 AI 功能、SDK 接入、客服工单、活动运营等高频场景，先用模板完成初筛；触发敏感个人信息、未成年人、自动化决策、第三方共享或训练用途时，再升级为专项评估。
+              <strong>交付物定位：</strong>本工具包由“处理活动台账 + 字段分级 + 上线评审流程 + 工单模板 + 未成年人专项检查”组成，用于支持游戏产品在需求、开发、上线和复盘阶段完成事实收集、风险初筛、评审留痕和专项升级。
             </div>
             <div>
               <ul class="list-clean">
@@ -1605,6 +1975,429 @@
           </table>
         </section>
 
+        <section class="project-break" id="screening-overview">
+          <h3>项目五：AI + Python 数据合规初筛工具 Demo</h3>
+          <p>
+            本项目将第四项工具包中的高频审查问题转化为静态网页可运行的规则引擎 Demo，用于模拟法务团队在新功能立项阶段快速识别个人信息、AI、SDK、未成年人和数据出境等风险。
+          </p>
+        </section>
+
+        <section id="screening-scenario">
+          <h3><span class="section-no">01</span>工具定位与适用边界</h3>
+          <p class="lead">
+            该工具定位为“初筛与分流”，不是替代最终法律意见。它先根据功能描述、字段、触发时机和勾选项命中规则，再输出风险等级、触发原因、需补充材料和下一步评估路径。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>工具定位：</strong>适合用于产品需求评审早期，帮助法务快速发现是否需要进入 PIPIA、AI 合规评估、第三方 SDK 尽调、未成年人专项或数据出境排查。最终结论仍需结合真实数据流、合同、技术检测和上线方案复核。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>工具前端使用确定性规则，适合部署为 GitHub Pages 静态网页。</li>
+                <li>规则均可追溯到个人信息保护、生成式 AI、标识、SDK、出境和审计要求。</li>
+                <li>AI Agent 可作为后续扩展，用于补充追问和多角度复核，但不能暴露 API 密钥在前端。</li>
+                <li>面试展示时可输入一个新功能，现场生成一份结构化初筛报告。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">规则引擎</span>
+            <span class="tag">PIPIA 初筛</span>
+            <span class="tag">AI 合规</span>
+            <span class="tag">SDK 尽调</span>
+            <span class="tag">AI Agent 扩展</span>
+          </div>
+        </section>
+
+        <section id="screening-demo">
+          <h3><span class="section-no">02</span>交互式初筛 Demo</h3>
+          <p class="lead">
+            使用方式：填写或选择一个功能案例，点击“生成初筛报告”。报告会列出命中规则、初步风险等级、需补充材料和建议下一步，并同步生成可打印为 PDF 的审查表和可导出的 CSV 表格。该 Demo 不上传任何数据，所有判断均在当前网页本地完成。
+          </p>
+          <div class="demo-steps" aria-label="初筛工具流程">
+            <div class="demo-step"><b>1. 输入事实</b><span>功能描述、采集字段、触发时机和高频风险标签。</span></div>
+            <div class="demo-step"><b>2. 规则命中</b><span>自动识别 PIPIA、AI、SDK、未成年人和出境风险。</span></div>
+            <div class="demo-step"><b>3. 输出交付物</b><span>生成初筛报告、审查表，并支持保存 PDF 或导出 CSV。</span></div>
+          </div>
+          <div class="demo-grid">
+            <div class="demo-panel">
+              <h4>功能输入</h4>
+              <div class="example-actions">
+                <button class="demo-button secondary" type="button" data-example="pam">载入：帕姆帮帮</button>
+                <button class="demo-button secondary" type="button" data-example="aigc">载入：AIGC 二创工坊</button>
+                <button class="demo-button secondary" type="button" data-example="sdk">载入：客服 SDK 接入</button>
+              </div>
+              <div class="form-row">
+                <label for="featureName">功能名称</label>
+                <input id="featureName" value="帕姆帮帮（测试版）AI 智能对话助手">
+              </div>
+              <div class="form-row">
+                <label for="featureDesc">功能描述</label>
+                <textarea id="featureDesc">玩家从聊天列表进入帕姆帮帮，输入养成、剧情或活动相关问题。系统结合 UID、开拓等级、角色持有、任务进度和玩家输入，由 AI 生成回复，并可能对对话内容进行分析和模型优化。</textarea>
+              </div>
+              <div class="form-row">
+                <label for="featureFields">可能采集字段</label>
+                <textarea id="featureFields">UID、昵称、开拓等级、任务状态、角色持有、材料库存、玩家输入、AI 回复、反馈记录、设备信息、日志</textarea>
+              </div>
+              <div class="form-row">
+                <label for="triggerTiming">触发时机</label>
+                <input id="triggerTiming" value="玩家主动点击聊天列表入口并提交问题后调用；不应在登录时默认采集完整上下文">
+              </div>
+              <div class="toggle-grid">
+                <span>高频风险标签</span>
+                <div class="toggle-options">
+                  <label class="demo-toggle"><input type="checkbox" id="flagAi" checked>涉及 AI 生成内容</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagTraining" checked>涉及训练/模型优化</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagMinor">可能影响未成年人</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagThirdParty">接入第三方或 SDK</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagOutbound">可能存在境外访问</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagAutomated">画像/推荐/自动化决策</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagSensitive">敏感或特殊保护信息</label>
+                  <label class="demo-toggle"><input type="checkbox" id="flagShare">生成内容可保存/分享</label>
+                </div>
+              </div>
+              <div class="demo-actions">
+                <button class="demo-button" type="button" id="runScreening">生成初筛报告</button>
+                <button class="demo-button secondary" type="button" id="clearScreening">清空重填</button>
+              </div>
+            </div>
+
+            <div class="demo-panel">
+              <h4>初筛报告</h4>
+              <div class="report-top">
+                <div class="risk-score high" id="riskScore">高风险<br>需专项评估</div>
+                <div class="report-summary" id="reportSummary">
+                  <b>功能：</b>帕姆帮帮（测试版）AI 智能对话助手<br>
+                  <b>结论：</b>建议进入 AI 合规评估与 PIPIA 初筛，重点核查训练用途、上下文最小必要、用户告知和未成年人策略。
+                </div>
+              </div>
+              <div class="report-kpis">
+                <div class="report-kpi"><strong id="kpiRules">0</strong>命中规则</div>
+                <div class="report-kpi"><strong id="kpiHigh">0</strong>高风险规则</div>
+                <div class="report-kpi"><strong id="kpiMaterials">0</strong>需补充材料</div>
+              </div>
+              <div class="report-block">
+                <b>命中规则</b>
+                <ul class="hit-list" id="hitList"></ul>
+              </div>
+              <div class="report-block">
+                <b>需补充材料</b>
+                <ul class="material-list" id="materialList"></ul>
+              </div>
+              <div class="report-block">
+                <b>建议下一步</b>
+                <p class="lead" id="nextStep">请点击“生成初筛报告”刷新结果。</p>
+              </div>
+              <div class="demo-actions">
+                <button class="demo-button secondary" type="button" id="copyReport">复制报告文字</button>
+                <button class="demo-button secondary" type="button" id="printReport">打印/保存 PDF</button>
+                <button class="demo-button secondary" type="button" id="exportCsv">导出 CSV 表格</button>
+              </div>
+              <div class="copy-note" id="copyNote"></div>
+              <div class="report-sheet" id="reportSheet">
+                <h4>新功能数据合规初筛审查表</h4>
+                <div class="sheet-meta">
+                  <span><b>功能名称：</b><span id="sheetName">帕姆帮帮（测试版）AI 智能对话助手</span></span>
+                  <span><b>生成时间：</b><span id="sheetDate">2026-06-08</span></span>
+                  <span><b>初步等级：</b><span id="sheetLevel">高风险</span></span>
+                  <span><b>建议路径：</b><span id="sheetPath">AI 合规评估 / PIPIA 初筛</span></span>
+                </div>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 14%">规则</th>
+                      <th style="width: 22%">风险主题</th>
+                      <th style="width: 31%">触发原因</th>
+                      <th style="width: 33%">建议动作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sheetRows"></tbody>
+                </table>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width: 28%">待补充材料</th>
+                      <th style="width: 72%">用途</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sheetMaterials"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="screening-rules">
+          <h3><span class="section-no">03</span>规则库文字版</h3>
+          <p class="lead">
+            规则库采用“触发条件 - 工具输出 - 法律依据”的结构。这样可以证明该 Demo 不是简单关键词搜索，而是把合规 checklist 转化为可解释、可维护的评估逻辑。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 10%">规则</th>
+                <th style="width: 26%">触发条件</th>
+                <th style="width: 38%">工具输出</th>
+                <th style="width: 26%">依据映射</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>R01</td><td>出现 UID、设备信息、IP、行为记录、聊天内容、联系方式、订单等</td><td>标记为“涉及个人信息处理”，要求补充字段清单、处理目的、触发时机和留存期限</td><td>《个人信息保护法》合法、正当、必要和告知规则</td></tr>
+              <tr><td>R02</td><td>字段与功能目的不匹配，或出现登录即采集、后台默认采集</td><td>提示“可能存在过度收集”，建议改为用户主动触发或删除非必要字段</td><td>《个人信息保护法》最小必要原则</td></tr>
+              <tr><td>R03</td><td>出现实名、面部识别、精确位置、金融账户、未满十四周岁个人信息等</td><td>风险等级升为高，提示单独同意、严格保护措施和 PIPIA 初筛</td><td>《个人信息保护法》敏感个人信息规则</td></tr>
+              <tr><td>R04</td><td>功能面向或可能影响未成年人账号</td><td>要求未成年人专项检查、监护人请求处理、内容审核和功能限制</td><td>《个人信息保护法》未成年人个人信息保护规则、《未成年人网络保护条例》</td></tr>
+              <tr><td>R05</td><td>涉及 AI 生成图片、文案、语音、视频、角色对话或虚拟场景</td><td>进入 AI 合规评估，检查内容安全、用户提示、投诉举报和生成结果复盘</td><td>《生成式人工智能服务管理暂行办法》</td></tr>
+              <tr><td>R06</td><td>生成内容允许保存、复制、导出或分享</td><td>要求显式标识、隐式标识、分享页提示和水印防移除设计</td><td>《人工智能生成合成内容标识办法》</td></tr>
+              <tr><td>R07</td><td>出现训练、模型优化、样本回流、效果提升等用途</td><td>要求说明训练用途、去标识化、关闭开关、样本留存和退出机制</td><td>《个人信息保护法》目的限定和同意规则；生成式 AI 训练数据治理要求</td></tr>
+              <tr><td>R08</td><td>出现推荐、个性化、画像、评分、自动处罚或自动客服结论</td><td>要求透明度、拒绝/关闭路径、人工复核或申诉机制</td><td>《个人信息保护法》自动化决策规则</td></tr>
+              <tr><td>R09</td><td>出现 SDK、第三方、客服系统、内容安全服务、广告归因、模型供应商</td><td>要求判断委托处理、共同处理或独立处理，补充合同、SDK 清单和二次共享限制</td><td>《个人信息保护法》委托处理、第三方提供及 PIPIA 规则</td></tr>
+              <tr><td>R10</td><td>出现海外、境外服务器、全球团队、远程访问、境外供应商</td><td>进入数据出境排查，判断安全评估、标准合同、认证或豁免路径</td><td>个人信息出境规则及数据出境配套规定</td></tr>
+              <tr><td>R11</td><td>未说明日志、对话、生成内容、训练样本保存期限</td><td>要求设置最短留存、删除机制、撤回同意后的处理方式</td><td>《个人信息保护法》保存期限、删除权和处理者义务</td></tr>
+              <tr><td>R12</td><td>涉及后台访问、工单、模型日志、SDK 日志、未成年人数据</td><td>要求权限分级、脱敏、访问日志、操作审计和安全事件响应</td><td>《个人信息保护法》安全保护义务、《个人信息保护合规审计管理办法》</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="screening-agent">
+          <h3><span class="section-no">04</span>AI Agent 扩展方案</h3>
+          <p class="lead">
+            若后续接入 AI Agent，建议采用“规则引擎先硬触发 + AI Agent 再复核追问”的双层结构。注意：API 密钥不能写进静态网页前端，应通过 Vercel/Netlify serverless function 或后端代理调用。
+          </p>
+          <div class="agent-grid">
+            <div class="path-card">
+              <b>Agent 1：事实补全</b>
+              <p>检查功能描述是否缺少字段、触发时机、第三方、留存期限、用户告知和退出路径，并生成追问清单。</p>
+            </div>
+            <div class="path-card">
+              <b>Agent 2：法律风险复核</b>
+              <p>基于规则命中结果，从 PIPIA、AI 标识、未成年人、SDK、出境和自动化决策角度交叉验证风险。</p>
+            </div>
+            <div class="path-card">
+              <b>Agent 3：整改建议生成</b>
+              <p>把风险点转成可执行整改项，例如字段删除、弹窗提示、合同条款、日志脱敏、留存期限和验收标准。</p>
+            </div>
+          </div>
+          <div class="code-box"># Python 规则引擎示意
+def assess_feature(text, flags):
+    risks = []
+    if any(word in text for word in ["实名", "面部识别", "联系方式", "订单", "未成年人"]):
+        risks.append("可能涉及敏感或特殊保护个人信息，建议进行 PIPIA 初筛")
+    if flags.get("ai") or any(word in text for word in ["AI", "生成图片", "生成文案", "Prompt"]):
+        risks.append("涉及生成式 AI 功能，需评估内容安全、标识和投诉机制")
+    if flags.get("training") or any(word in text for word in ["训练", "模型优化", "样本回流"]):
+        risks.append("涉及训练数据治理，需明确告知、去标识化和退出机制")
+    if flags.get("third_party") or any(word in text for word in ["SDK", "第三方", "客服系统"]):
+        risks.append("涉及第三方处理，应判断委托处理、共同处理或独立处理")
+    return risks</div>
+        </section>
+
+        <section class="project-break" id="brief-overview">
+          <h3>项目六：中国数据与 AI 合规监管动态简报</h3>
+          <p>
+            本项目模拟面向游戏产品、研发、运营和法务团队的月度合规简报，将近期中国个人信息保护、网络数据安全、AI 生成内容标识、数据出境和合规审计规则转化为产品影响和行动建议。
+          </p>
+        </section>
+
+        <section id="brief-scenario">
+          <h3><span class="section-no">01</span>简报定位与阅读对象</h3>
+          <p class="lead">
+            简报的核心不是摘抄法规，而是回答业务团队最关心的三个问题：有什么新变化、对游戏功能有什么影响、下一版本要做什么。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>简报结论：</strong>截至 2026-06-11，游戏产品的数据与 AI 合规重点可以归纳为“数据处理可审计、出境路径可解释、AI 生成内容可识别、未成年人保护更精细、第三方/SDK 接入可追踪”。简报应每月更新一次，并同步沉淀到项目四的工具包和项目五的初筛规则库。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>面向对象：产品经理、研发、安全、算法、运营、客服、法务。</li>
+                <li>输出形式：一页简报 + 影响矩阵 + 下一步行动清单。</li>
+                <li>使用场景：版本评审、AI 功能上线、SDK 接入、客服流程优化、合规审计准备。</li>
+                <li>面试展示重点：能把法规动态翻译成产品可执行事项。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tag-row">
+            <span class="tag">法规追踪</span>
+            <span class="tag">产品影响</span>
+            <span class="tag">行动建议</span>
+            <span class="tag">合规审计</span>
+            <span class="tag">AI 标识</span>
+          </div>
+        </section>
+
+        <section id="brief-tracker">
+          <h3><span class="section-no">02</span>监管动态追踪表</h3>
+          <p class="lead">
+            选取与境内游戏产品最相关的规则更新，将其拆成“关注点”和“对游戏业务的影响”。本表按“发布、施行、落地跟踪”记录，避免只停留在法规公布日。
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 14%">时间</th>
+                <th style="width: 24%">动态</th>
+                <th style="width: 30%">核心关注点</th>
+                <th style="width: 32%">对游戏产品的影响</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024.03</td>
+                <td>《促进和规范数据跨境流动规定》施行</td>
+                <td>优化数据出境规则，明确若干场景下安全评估、标准合同、认证或豁免的适用边界</td>
+                <td>境内游戏接入海外客服、海外分析、全球技术支持时，应先做出境路径排查；纯境内 SDK 接入可记录排除结论</td>
+              </tr>
+              <tr>
+                <td>2024.09</td>
+                <td>《网络数据安全管理条例》公布</td>
+                <td>强调网络数据处理者义务、重要数据、个人信息保护、风险监测和安全事件处置</td>
+                <td>版本迭代应留存数据处理活动台账、权限审计、第三方管理和安全事件响应记录</td>
+              </tr>
+              <tr>
+                <td>2024.09</td>
+                <td>TC260《人工智能安全治理框架》1.0 版发布</td>
+                <td>从模型、数据、内容、应用和安全治理角度提出 AI 风险治理框架</td>
+                <td>游戏 AI 助手、智能客服、AIGC 二创功能可参考其建立内容安全、训练数据和输出复核机制</td>
+              </tr>
+              <tr>
+                <td>2025.02</td>
+                <td>《个人信息保护合规审计管理办法》公布</td>
+                <td>强调个人信息处理活动审计、审计频次、审计事项和整改要求</td>
+                <td>产品团队需要保留评审工单、PIPIA、SDK 尽调、权限日志和整改验收记录，不能只口头说明“已评估”</td>
+              </tr>
+              <tr>
+                <td>2025.03</td>
+                <td>《人工智能生成合成内容标识办法》公布</td>
+                <td>要求对 AI 生成合成内容设置显式标识和隐式标识，覆盖文本、图片、音频、视频和虚拟场景</td>
+                <td>AIGC 头像、壁纸、表情包、AI 角色对话、分享图等功能需要设计水印、元数据标识和用户提示</td>
+              </tr>
+              <tr>
+                <td>2025.05</td>
+                <td>《个人信息保护合规审计管理办法》施行</td>
+                <td>合规审计从“建议性管理动作”变成更明确的制度化要求，审计材料、整改记录和责任分工需要可追溯</td>
+                <td>游戏产品的 PIPIA、SDK 尽调、客服权限、未成年人数据、AI 训练样本和删除记录应形成可审计档案</td>
+              </tr>
+              <tr>
+                <td>2025.09</td>
+                <td>《人工智能生成合成内容标识办法》施行</td>
+                <td>AI 生成合成内容标识进入落地阶段，显式标识、隐式标识、用户提示和平台传播链路需要同步设计</td>
+                <td>AIGC 二创、AI 对话导出、分享图、虚拟场景和社区分发内容需要补充水印、元数据标识和去水印防控</td>
+              </tr>
+              <tr>
+                <td>2026.06</td>
+                <td>持续跟踪项：AI 互动、算法治理和数据安全规则更新</td>
+                <td>对尚未取得官方稳定文本或正式施行信息的动态，先列为跟踪项，不直接写入已生效义务</td>
+                <td>面向游戏产品重点关注 AI 陪伴/拟人化互动、生成式 AI 备案、算法推荐、未成年人保护和网络安全法相关修订进展</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="brief-impact">
+          <h3><span class="section-no">03</span>游戏产品影响矩阵</h3>
+          <div class="path-grid">
+            <div class="path-card">
+              <b>AI 助手/智能客服</b>
+              <p>重点关注用户输入、AI 回复、训练用途、内容安全、未成年人账号策略、投诉举报和人工复核机制。</p>
+            </div>
+            <div class="path-card">
+              <b>AIGC 二创/分享图</b>
+              <p>重点关注生成合成内容标识、水印、IP 边界、UGC 审核、真人肖像和第三方平台传播风险。</p>
+            </div>
+            <div class="path-card">
+              <b>SDK/第三方服务</b>
+              <p>重点关注字段最小必要、触发时机、处理关系、二次共享、境外访问排除、合同和安全审计。</p>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 24%">业务模块</th>
+                <th style="width: 28%">可能触发的监管主题</th>
+                <th style="width: 24%">法务应追问</th>
+                <th style="width: 24%">输出材料</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>新版本活动页</td><td>埋点、画像、未成年人、活动规则</td><td>是否默认采集行为事件，是否用于个性化推荐</td><td>字段清单、埋点审批、隐私政策更新记录</td></tr>
+              <tr><td>帕姆帮帮/AI 助手</td><td>生成式 AI、训练数据、PIPIA、内容安全</td><td>是否用对话训练模型，用户是否可以关闭训练用途</td><td>AI 合规评估、PIPIA 初筛、训练数据治理说明</td></tr>
+              <tr><td>AIGC 二创工具</td><td>生成合成内容标识、UGC 审核、IP 合规</td><td>生成图是否可下载分享，是否有显式/隐式标识</td><td>水印方案、审核规则、举报处置流程</td></tr>
+              <tr><td>客服与工单系统</td><td>委托处理、敏感信息、未成年人请求、审计留痕</td><td>客服是否可查看订单、截图、聊天和实名相关信息</td><td>委托处理协议、权限矩阵、工单留存和审计记录</td></tr>
+              <tr><td>跨境协作/海外支持</td><td>数据出境、远程访问、第三方接收方</td><td>境外团队是否能访问日志、工单、玩家个人信息</td><td>出境排查表、接收方信息、标准合同或排除结论</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="brief-action">
+          <h3><span class="section-no">04</span>持续跟进行动</h3>
+          <div class="timeline">
+            <div class="timeline-row">
+              <b>规则库维护</b>
+              <p>更新项目五初筛规则库，将 AI 标识、合规审计、数据出境排除和未成年人专项作为高风险自动触发项。</p>
+            </div>
+            <div class="timeline-row">
+              <b>业务抽样核查</b>
+              <p>抽样检查一个 AI 功能、一个 SDK 接入和一个客服工单流程，验证是否存在字段台账缺失、留存期限不清或第三方合同不完整。</p>
+            </div>
+            <div class="timeline-row">
+              <b>跨团队同步</b>
+              <p>与产品、研发、安全同步“新功能上线合规工单模板”，要求版本需求进入开发前补充字段、触发时机、第三方和用户告知。</p>
+            </div>
+            <div class="timeline-row">
+              <b>归档与复盘</b>
+              <p>形成简报复盘：新增法规动态、施行节点、跟踪事项、整改进度、遗留风险和下月重点，沉淀为审计留痕材料。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="project-break" id="gamer-overview">
+          <h3>项目七：游戏经历与产品理解能力表达</h3>
+          <p>
+            本项目将“资深游戏玩家/二次元用户”这一岗位要求转化为可展示的产品理解能力，说明如何从玩家视角识别账号、抽卡、养成、社交、UGC、客服和未成年人保护中的数据与 AI 合规风险。
+          </p>
+        </section>
+
+        <section id="gamer-scenario">
+          <h3><span class="section-no">01</span>能力定位</h3>
+          <p class="lead">
+            对这个岗位来说，“资深游戏玩家”不是简历兴趣爱好，而是理解产品链路、玩家心理和真实使用场景的能力。法务如果理解游戏机制，才能更早发现数据处理和用户权益风险。
+          </p>
+          <div class="two-col">
+            <div class="callout">
+              <strong>能力呈现：</strong>本部分展示对二次元游戏核心机制和玩家路径的理解，并将该理解转化为数据流识别、个人信息处理场景拆解、用户权益风险判断和合规控制设计能力。
+            </div>
+            <div>
+              <ul class="list-clean">
+                <li>产品理解：覆盖角色养成、抽卡、活动、任务、成就、客服和社区生态等高频游戏机制。</li>
+                <li>用户视角：能够从账号安全、资源获取、误封申诉、活动公平和内容分享等玩家关切识别权益风险。</li>
+                <li>合规转化：将玩家路径拆解为数据字段、处理目的、触发时机、第三方关系、留存期限和用户权利路径。</li>
+                <li>协作价值：支持法务与产品、运营、研发沟通控制措施，降低“合规要求”与“玩家体验”之间的落地摩擦。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="gamer-map">
+          <h3><span class="section-no">02</span>游戏机制与合规风险映射</h3>
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 20%">游戏机制</th>
+                <th style="width: 28%">玩家视角理解</th>
+                <th style="width: 28%">可能涉及数据/AI 风险</th>
+                <th style="width: 24%">法务关注点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>账号登录与实名</td><td>玩家关心账号安全、找回效率、防沉迷限制是否准确</td><td>实名状态、年龄段、登录设备、异常登录、客服核验</td><td>最小必要、权限隔离、未成年人规则、账号申诉路径</td></tr>
+              <tr><td>抽卡与充值</td><td>玩家关心概率透明、充值安全、退款争议和未成年人消费</td><td>订单信息、支付争议、消费记录、未成年人充值限制</td><td>敏感信息保护、客服工单脱敏、监护人请求、审计留痕</td></tr>
+              <tr><td>角色养成</td><td>玩家关心材料规划、角色强度、推荐方案是否准确</td><td>角色持有、养成进度、材料库存、AI 推荐或画像</td><td>自动化决策透明度、训练用途、数据最小必要</td></tr>
+              <tr><td>版本活动</td><td>玩家关心活动入口、任务进度、奖励领取和公平性</td><td>活动点击、任务完成、活跃数据、渠道来源</td><td>埋点审批、画像边界、隐私政策披露和留存期限</td></tr>
+              <tr><td>社区与二创</td><td>玩家关心分享便利、作品展示、举报处理和 IP 边界</td><td>UGC 内容、截图、AI 生成图、分享记录、举报信息</td><td>AI 标识、水印、内容审核、侵权处置和未成年人保护</td></tr>
+              <tr><td>客服与封禁申诉</td><td>玩家关心处理速度、证据充分、误封纠正和客服态度</td><td>工单、截图、日志、处罚记录、聊天上下文</td><td>委托处理、权限分级、人工复核、申诉和删除路径</td></tr>
+            </tbody>
+          </table>
+        </section>
+
         <section id="sources">
           <h3>主要参考依据</h3>
           <ul class="source-list">
@@ -1618,6 +2411,7 @@
             <li><a href="https://www.cac.gov.cn/2023-07/13/c_1690898326795531.htm">《生成式人工智能服务管理暂行办法》</a></li>
             <li><a href="https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm">《人工智能生成合成内容标识办法》</a></li>
             <li><a href="https://www.cac.gov.cn/2022-12/11/c_1672221949354811.htm">《互联网信息服务深度合成管理规定》</a></li>
+            <li><a href="https://www.cac.gov.cn/2022-01/04/c_1642894606364259.htm">《互联网信息服务算法推荐管理规定》</a></li>
             <li><a href="https://www.cac.gov.cn/2025-02/14/c_1741233507681519.htm">《个人信息保护合规审计管理办法》</a></li>
             <li><a href="https://www.tc260.org.cn/portal/article/2/20240909102807">TC260《人工智能安全治理框架》1.0 版</a></li>
             <li><a href="https://bbs.mihoyo.com/sr/wiki/content/7327/detail?bbs_presentation_style=no_header">米游社《帕姆帮帮（测试版）》公开说明</a></li>
@@ -1631,9 +2425,400 @@
       </div>
 
       <footer>
-        预览稿生成日期：2026-06-08 · 用于求职作品集讨论与修改
+        预览稿更新日期：2026-06-11 · 用于求职作品集讨论与修改
       </footer>
     </main>
   </div>
+  <script>
+    const examples = {
+      pam: {
+        name: "帕姆帮帮（测试版）AI 智能对话助手",
+        desc: "玩家从聊天列表进入帕姆帮帮，输入养成、剧情或活动相关问题。系统结合 UID、开拓等级、角色持有、任务进度和玩家输入，由 AI 生成回复，并可能对对话内容进行分析和模型优化。",
+        fields: "UID、昵称、开拓等级、任务状态、角色持有、材料库存、玩家输入、AI 回复、反馈记录、设备信息、日志",
+        timing: "玩家主动点击聊天列表入口并提交问题后调用；不应在登录时默认采集完整上下文",
+        flags: ["flagAi", "flagTraining"]
+      },
+      aigc: {
+        name: "AIGC 二创工坊",
+        desc: "玩家选择角色、场景和模板，输入 Prompt 或祝福语，系统生成头像、壁纸、表情包或纪念票，并允许保存到本地或分享到社区。生成内容需进行输入审核、输出审核和水印标识。",
+        fields: "UID、角色选择、模板选择、Prompt、生成图片、生成文案、分享记录、举报记录、设备信息、内容安全标签",
+        timing: "玩家主动进入二创工坊并点击生成后采集；生成结果保存和分享时追加标识信息",
+        flags: ["flagAi", "flagMinor", "flagShare"]
+      },
+      sdk: {
+        name: "境内客服系统与崩溃日志 SDK 接入",
+        desc: "新版本接入境内客服系统和崩溃日志 SDK，用于处理充值争议、账号找回、Bug 反馈和客户端闪退问题。供应商仅按公司指令处理工单和日志，不得复用数据训练自有模型。",
+        fields: "UID、联系方式、订单号、工单内容、截图、设备型号、系统版本、IP、崩溃堆栈、日志、客服处理记录",
+        timing: "玩家提交客服工单或客户端发生崩溃后采集；不得在未触发功能时默认上传完整日志",
+        flags: ["flagThirdParty", "flagSensitive"]
+      }
+    };
+
+    const screeningRules = [
+      {
+        id: "R01",
+        title: "个人信息处理识别",
+        level: "mid",
+        keywords: ["UID", "设备", "IP", "行为", "聊天", "联系方式", "订单", "日志", "昵称", "截图"],
+        reason: "功能描述或字段中出现可识别玩家身份、设备或行为的信息。",
+        material: "个人信息字段清单、处理目的、触发时机、留存期限、用户告知文案",
+        action: "进入普通个人信息处理审查，确认合法、正当、必要和告知充分性。"
+      },
+      {
+        id: "R02",
+        title: "最小必要与默认采集风险",
+        level: "high",
+        keywords: ["登录时默认", "后台默认", "默认采集", "完整上下文", "全量日志", "持续采集"],
+        reason: "可能存在未使用功能即采集、采集范围过宽或触发时机过早的问题。",
+        material: "字段必要性说明、触发条件说明、技术开关方案、数据流图",
+        action: "建议改为用户主动触发，并删除与功能目的无关的字段。"
+      },
+      {
+        id: "R03",
+        title: "敏感或特殊保护个人信息",
+        level: "high",
+        flags: ["flagSensitive"],
+        keywords: ["实名", "面部识别", "人脸", "精确位置", "金融账户", "联系方式", "订单", "未成年人", "不满十四"],
+        reason: "可能涉及敏感个人信息、未成年人信息、订单争议或联系方式等高风险字段。",
+        material: "单独同意方案、严格保护措施、权限分级、删除和撤回路径、PIPIA 初筛材料",
+        action: "建议提升为高风险处理活动，进行专项评估并限制访问权限。"
+      },
+      {
+        id: "R04",
+        title: "未成年人专项",
+        level: "high",
+        flags: ["flagMinor"],
+        keywords: ["未成年人", "防沉迷", "监护人", "年龄", "儿童"],
+        reason: "功能可能影响未成年人账号或涉及监护人请求处理。",
+        material: "未成年人字段清单、监护人同意/请求流程、内容审核策略、功能限制方案",
+        action: "启动未成年人个人信息专项检查，设置更严格的内容和权限控制。"
+      },
+      {
+        id: "R05",
+        title: "生成式 AI 功能",
+        level: "high",
+        flags: ["flagAi"],
+        keywords: ["AI", "生成", "Prompt", "对话助手", "智能客服", "生成图片", "生成文案", "虚拟场景"],
+        reason: "功能涉及 AI 生成回复、图片、文案或虚拟内容。",
+        material: "AI 功能说明、模型供应商材料、输入输出审核策略、投诉举报和纠错机制",
+        action: "进入生成式 AI 合规评估，重点审查内容安全、用户提示和责任分工。"
+      },
+      {
+        id: "R06",
+        title: "生成内容标识与水印",
+        level: "high",
+        flags: ["flagShare"],
+        keywords: ["保存", "分享", "导出", "下载", "社区", "水印", "复制"],
+        reason: "生成内容可能被保存、导出或分享至游戏社区或外部平台。",
+        material: "显式标识文案、隐式标识方案、分享页提示、水印防移除方案、举报入口",
+        action: "落实 AI 生成合成内容标识，保留可追踪的生成记录。"
+      },
+      {
+        id: "R07",
+        title: "训练数据治理",
+        level: "high",
+        flags: ["flagTraining"],
+        keywords: ["训练", "模型优化", "样本回流", "效果提升", "分析", "优化模型"],
+        reason: "用户输入、AI 输出或反馈可能用于训练、模型优化或样本回流。",
+        material: "训练用途说明、去标识化方案、用户关闭开关、样本留存期限、训练数据来源记录",
+        action: "明确训练目的和退出机制，避免默认将个人信息用于未充分告知的训练用途。"
+      },
+      {
+        id: "R08",
+        title: "画像、推荐或自动化决策",
+        level: "mid",
+        flags: ["flagAutomated"],
+        keywords: ["推荐", "个性化", "画像", "评分", "自动处罚", "自动封禁", "自动客服"],
+        reason: "功能可能根据用户行为形成画像、推荐结果或自动化处理结论。",
+        material: "自动化决策说明、关闭或拒绝路径、人工复核机制、申诉流程",
+        action: "核查透明度、公平性和用户权利路径，避免对用户权益产生不当影响。"
+      },
+      {
+        id: "R09",
+        title: "第三方服务或 SDK",
+        level: "high",
+        flags: ["flagThirdParty"],
+        keywords: ["SDK", "第三方", "客服系统", "内容安全", "模型供应商", "广告", "归因", "供应商"],
+        reason: "功能可能涉及第三方服务、SDK 或供应商处理个人信息。",
+        material: "SDK 清单、供应商主体、服务器位置、合同条款、二次共享说明、技术检测记录",
+        action: "判断委托处理、共同处理或独立处理，并完成第三方尽调。"
+      },
+      {
+        id: "R10",
+        title: "数据出境排查",
+        level: "high",
+        flags: ["flagOutbound"],
+        keywords: ["境外", "海外", "全球团队", "远程访问", "境外服务器", "跨境"],
+        reason: "可能存在境外接收、境外远程访问或境外供应商处理个人信息。",
+        material: "境外访问排查表、接收方信息、数据项、出境目的、合同和安全措施",
+        action: "启动数据出境专项排查，判断安全评估、标准合同、认证或豁免路径。"
+      },
+      {
+        id: "R11",
+        title: "留存、删除与撤回",
+        level: "mid",
+        keywords: ["留存", "保存", "删除", "撤回", "保留", "日志"],
+        reason: "功能涉及对话、日志、生成内容或训练样本的保存与删除。",
+        material: "保存期限、删除规则、撤回同意后的处理方式、备份删除机制",
+        action: "设置最短留存期限和可执行删除流程，并保留处理记录。"
+      },
+      {
+        id: "R12",
+        title: "权限控制与审计留痕",
+        level: "mid",
+        keywords: ["后台", "工单", "访问", "审计", "权限", "导出", "客服处理"],
+        reason: "后台人员或供应商可能访问工单、日志、AI 对话或未成年人信息。",
+        material: "访问权限矩阵、操作日志、导出审批、脱敏方案、安全事件响应流程",
+        action: "落实最小权限、操作留痕、异常审计和安全事件通知机制。"
+      }
+    ];
+
+    function getTextInput() {
+      const ids = ["featureName", "featureDesc", "featureFields", "triggerTiming"];
+      return ids.map((id) => document.getElementById(id)?.value || "").join(" ");
+    }
+
+    function getFlags() {
+      return {
+        flagAi: document.getElementById("flagAi")?.checked,
+        flagTraining: document.getElementById("flagTraining")?.checked,
+        flagMinor: document.getElementById("flagMinor")?.checked,
+        flagThirdParty: document.getElementById("flagThirdParty")?.checked,
+        flagOutbound: document.getElementById("flagOutbound")?.checked,
+        flagAutomated: document.getElementById("flagAutomated")?.checked,
+        flagSensitive: document.getElementById("flagSensitive")?.checked,
+        flagShare: document.getElementById("flagShare")?.checked
+      };
+    }
+
+    function ruleMatches(rule, text, flags) {
+      const flagHit = (rule.flags || []).some((flag) => flags[flag]);
+      const keywordHit = (rule.keywords || []).some((word) => text.includes(word));
+      return flagHit || keywordHit;
+    }
+
+    function unique(values) {
+      return Array.from(new Set(values.filter(Boolean)));
+    }
+
+    let currentReport = {
+      featureName: "",
+      scoreClass: "low",
+      scoreLabel: "低风险",
+      conclusion: "",
+      hits: [],
+      materials: [],
+      nextStep: ""
+    };
+
+    function escapeCsv(value) {
+      return '"' + String(value || "").replace(/"/g, '""') + '"';
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function materialPurpose(material) {
+      if (material.includes("字段")) return "用于判断处理目的、最小必要、触发时机和用户告知是否充分。";
+      if (material.includes("单独同意")) return "用于核查敏感个人信息、特殊保护信息或高风险处理活动的合法性。";
+      if (material.includes("AI") || material.includes("模型") || material.includes("训练")) return "用于核查生成式 AI 内容安全、训练数据治理、标识和投诉机制。";
+      if (material.includes("SDK") || material.includes("供应商") || material.includes("合同")) return "用于判断第三方处理关系、二次共享、合同义务和供应商安全措施。";
+      if (material.includes("境外")) return "用于判断是否存在境外接收、境外远程访问或跨境处理路径。";
+      if (material.includes("权限") || material.includes("日志")) return "用于落实最小权限、操作留痕、安全审计和事件响应。";
+      return "用于补充事实材料，支持法务完成最终审查结论。";
+    }
+
+    function renderSheet() {
+      const dateText = new Date().toLocaleDateString("zh-CN");
+      document.getElementById("sheetName").textContent = currentReport.featureName;
+      document.getElementById("sheetDate").textContent = dateText;
+      document.getElementById("sheetLevel").textContent = currentReport.scoreLabel;
+      document.getElementById("sheetPath").textContent = currentReport.nextStep;
+
+      const rows = document.getElementById("sheetRows");
+      rows.innerHTML = "";
+      (currentReport.hits.length ? currentReport.hits : [{
+        id: "R00",
+        title: "未命中明显风险规则",
+        reason: "当前输入信息较少或未出现高频风险关键词。",
+        action: "继续补充字段、触发时机、第三方和留存信息。"
+      }]).forEach((rule) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + rule.id + "</td><td>" + rule.title + "</td><td>" + rule.reason + "</td><td>" + rule.action + "</td>";
+        rows.appendChild(tr);
+      });
+
+      const materialRows = document.getElementById("sheetMaterials");
+      materialRows.innerHTML = "";
+      (currentReport.materials.length ? currentReport.materials : ["字段清单、处理目的、触发时机、留存期限、用户告知文案"]).forEach((item) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = "<td>" + item + "</td><td>" + materialPurpose(item) + "</td>";
+        materialRows.appendChild(tr);
+      });
+    }
+
+    function renderReport() {
+      const text = getTextInput();
+      const flags = getFlags();
+      const featureName = document.getElementById("featureName").value || "未命名功能";
+      const hits = screeningRules.filter((rule) => ruleMatches(rule, text, flags));
+      const highCount = hits.filter((rule) => rule.level === "high").length;
+      const midCount = hits.filter((rule) => rule.level === "mid").length;
+      const scoreClass = highCount > 0 ? "high" : midCount > 1 ? "mid" : "low";
+      const scoreText = scoreClass === "high" ? "高风险<br>需专项评估" : scoreClass === "mid" ? "中风险<br>需补充材料" : "低风险<br>普通审查";
+      const scoreLabel = scoreClass === "high" ? "高风险" : scoreClass === "mid" ? "中风险" : "低风险";
+      const conclusion = scoreClass === "high"
+        ? "建议进入专项审查，至少完成命中领域的事实补充、责任分工和整改验收。"
+        : scoreClass === "mid"
+          ? "建议补充字段、触发时机、留存和告知材料后，由法务复核是否升级专项。"
+          : "未命中明显高风险规则，可按普通个人信息处理活动完成基础审查。";
+
+      const riskScore = document.getElementById("riskScore");
+      riskScore.className = "risk-score " + scoreClass;
+      riskScore.innerHTML = scoreText;
+
+      document.getElementById("reportSummary").innerHTML =
+        "<b>功能：</b>" + escapeHtml(featureName) + "<br>" +
+        "<b>结论：</b>" + escapeHtml(conclusion) + "<br>" +
+        "<b>命中：</b>" + hits.length + " 条规则，其中高风险 " + highCount + " 条，中风险 " + midCount + " 条。";
+
+      const hitList = document.getElementById("hitList");
+      hitList.innerHTML = "";
+      (hits.length ? hits : [{
+        id: "R00",
+        title: "未命中明显风险规则",
+        reason: "当前输入信息较少或未出现高频风险关键词。",
+        action: "建议继续补充字段、触发时机、第三方和留存信息。"
+      }]).forEach((rule) => {
+        const li = document.createElement("li");
+        li.innerHTML = "<strong>" + rule.id + " " + rule.title + "：</strong>" + rule.reason + " " + rule.action;
+        hitList.appendChild(li);
+      });
+
+      const materials = unique(hits.map((rule) => rule.material));
+      document.getElementById("kpiRules").textContent = hits.length;
+      document.getElementById("kpiHigh").textContent = highCount;
+      document.getElementById("kpiMaterials").textContent = materials.length || 1;
+      const materialList = document.getElementById("materialList");
+      materialList.innerHTML = "";
+      (materials.length ? materials : ["字段清单、处理目的、触发时机、留存期限、用户告知文案"]).forEach((item, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = "<strong>材料 " + (index + 1) + "：</strong>" + item;
+        materialList.appendChild(li);
+      });
+
+      const nextSteps = [];
+      if (hits.some((rule) => ["R03", "R04", "R08", "R09", "R10"].includes(rule.id))) nextSteps.push("完成 PIPIA 触发判断或个人信息保护影响评估初筛");
+      if (hits.some((rule) => ["R05", "R06", "R07"].includes(rule.id))) nextSteps.push("进入 AI 合规评估，补充内容安全、训练数据和标识方案");
+      if (hits.some((rule) => rule.id === "R09")) nextSteps.push("启动第三方服务/SDK 尽调和处理关系判断");
+      if (hits.some((rule) => rule.id === "R10")) nextSteps.push("开展境外访问排除检查或数据出境专项评估");
+      if (hits.some((rule) => rule.id === "R04")) nextSteps.push("启动未成年人个人信息专项检查");
+      const nextStepText = unique(nextSteps).join("；") || "按普通个人信息处理活动审查，补充基础事实材料后归档。";
+      document.getElementById("nextStep").textContent = nextStepText;
+      currentReport = {
+        featureName,
+        scoreClass,
+        scoreLabel,
+        conclusion,
+        hits,
+        materials,
+        nextStep: nextStepText
+      };
+      renderSheet();
+      document.getElementById("copyNote").textContent = "";
+    }
+
+    function loadExample(key) {
+      const example = examples[key];
+      if (!example) return;
+      document.getElementById("featureName").value = example.name;
+      document.getElementById("featureDesc").value = example.desc;
+      document.getElementById("featureFields").value = example.fields;
+      document.getElementById("triggerTiming").value = example.timing;
+      Object.keys(getFlags()).forEach((flag) => {
+        document.getElementById(flag).checked = example.flags.includes(flag);
+      });
+      renderReport();
+    }
+
+    function copyReport() {
+      const text = [
+        document.getElementById("reportSummary").innerText,
+        "命中规则：",
+        Array.from(document.querySelectorAll("#hitList li")).map((li) => "- " + li.innerText).join("\n"),
+        "需补充材料：",
+        Array.from(document.querySelectorAll("#materialList li")).map((li) => "- " + li.innerText).join("\n"),
+        "建议下一步：" + document.getElementById("nextStep").innerText
+      ].join("\n");
+
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById("copyNote").textContent = "已复制初筛报告文字。";
+      }).catch(() => {
+        document.getElementById("copyNote").textContent = "当前浏览器不支持自动复制，可手动选中报告文字。";
+      });
+    }
+
+    function exportCsv() {
+      const rows = [
+        ["功能名称", currentReport.featureName],
+        ["初步风险等级", currentReport.scoreLabel],
+        ["建议路径", currentReport.nextStep],
+        [],
+        ["规则编号", "风险主题", "触发原因", "建议动作"],
+        ...(currentReport.hits.length ? currentReport.hits : [{
+          id: "R00",
+          title: "未命中明显风险规则",
+          reason: "当前输入信息较少或未出现高频风险关键词。",
+          action: "继续补充字段、触发时机、第三方和留存信息。"
+        }]).map((rule) => [rule.id, rule.title, rule.reason, rule.action]),
+        [],
+        ["待补充材料", "用途"],
+        ...(currentReport.materials.length ? currentReport.materials : ["字段清单、处理目的、触发时机、留存期限、用户告知文案"]).map((item) => [item, materialPurpose(item)])
+      ];
+      const csv = rows.map((row) => row.map(escapeCsv).join(",")).join("\n");
+      const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "data-compliance-screening-report.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      document.getElementById("copyNote").textContent = "已导出 CSV 审查表。";
+    }
+
+    function printReport() {
+      document.body.classList.add("print-report-only");
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove("print-report-only");
+      }, 600);
+    }
+
+    document.querySelectorAll("[data-example]").forEach((button) => {
+      button.addEventListener("click", () => loadExample(button.dataset.example));
+    });
+    document.getElementById("runScreening")?.addEventListener("click", renderReport);
+    document.getElementById("copyReport")?.addEventListener("click", copyReport);
+    document.getElementById("exportCsv")?.addEventListener("click", exportCsv);
+    document.getElementById("printReport")?.addEventListener("click", printReport);
+    document.getElementById("clearScreening")?.addEventListener("click", () => {
+      ["featureName", "featureDesc", "featureFields", "triggerTiming"].forEach((id) => {
+        document.getElementById(id).value = "";
+      });
+      Object.keys(getFlags()).forEach((flag) => {
+        document.getElementById(flag).checked = false;
+      });
+      renderReport();
+    });
+    renderReport();
+  </script>
 </body>
 </html>
