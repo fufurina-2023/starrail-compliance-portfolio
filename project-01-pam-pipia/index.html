@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>项目一深度研究：PIPIA 专项工作底稿</title>
+  <style>
+    :root {
+      --navy: #17202a;
+      --navy-2: #27313f;
+      --blue: #0b6f7f;
+      --blue-2: #266f8f;
+      --gold: #c58917;
+      --gold-soft: #fff7e6;
+      --paper: #ffffff;
+      --bg: #f6f8fb;
+      --ink: #1d2733;
+      --muted: #667085;
+      --line: #d8dee8;
+      --pale: #e8f6f7;
+      --pale-2: #f8fafc;
+      --plum: #594a7a;
+      --plum-soft: #f0edf7;
+      --high: #8a1f1f;
+      --mid: #8a6500;
+      --low: #1f6b4d;
+      --shadow: 0 16px 42px rgba(23, 32, 42, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(11, 111, 127, .07) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(11, 111, 127, .05) 0 1px, transparent 1px 100%),
+        var(--bg);
+      background-size: 28px 28px, 28px 28px, auto;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 28px;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .side {
+      position: sticky;
+      top: 24px;
+      height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 22px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(11, 111, 127, .12);
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 23px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .nav {
+      display: grid;
+      gap: 6px;
+      margin-top: 18px;
+    }
+
+    .nav a {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 10px;
+      color: #344054;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      background: var(--pale);
+      color: var(--navy);
+    }
+
+    .nav .no {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .tools {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .button {
+      border: 0;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 0 14px;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 6px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      color: var(--navy);
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .main {
+      min-width: 0;
+    }
+
+    .hero {
+      min-height: 500px;
+      padding: 58px 64px;
+      background:
+        linear-gradient(90deg, rgba(11, 111, 127, .08) 0 1px, transparent 1px 100%),
+        linear-gradient(180deg, rgba(11, 111, 127, .06) 0 1px, transparent 1px 100%),
+        #ffffff;
+      background-size: 30px 30px, 30px 30px, auto;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-top: 7px solid var(--blue);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 34px;
+    }
+
+    .hero h2 {
+      max-width: 900px;
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(40px, 6vw, 78px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero .subtitle {
+      max-width: 900px;
+      margin: 24px 0 0;
+      color: #465a6f;
+      font-size: 22px;
+      line-height: 1.55;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 58px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .metric {
+      min-height: 116px;
+      padding: 22px;
+      background: #fff;
+      border-left: 1px solid var(--line);
+    }
+
+    .metric:first-child {
+      background: var(--pale);
+      border-left: 0;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      line-height: 1.35;
+    }
+
+    section {
+      margin-top: 22px;
+      padding: 42px 52px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(23, 32, 42, .05);
+      scroll-margin-top: 24px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .section-no {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      color: var(--blue);
+      background: var(--pale);
+      border: 1px solid rgba(11, 111, 127, .25);
+      border-radius: 6px;
+      font-weight: 900;
+    }
+
+    h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 32px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h4 {
+      margin: 30px 0 12px;
+      color: var(--blue);
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    p {
+      margin: 0 0 14px;
+      font-size: 16px;
+    }
+
+    .lead {
+      color: #25384b;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 20px 22px;
+      background: var(--pale);
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+    }
+
+    .callout.gold {
+      background: var(--gold-soft);
+      border-left-color: var(--gold);
+    }
+
+    .callout strong {
+      color: var(--navy);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      color: var(--blue);
+      background: var(--pale);
+      border: 1px solid #d9e5f2;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 20px;
+      background: var(--pale-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .card b {
+      color: var(--navy);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(130px, 1fr));
+      gap: 12px;
+      margin: 26px 0;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 126px;
+      padding: 18px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--blue);
+      border-radius: 6px;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: -12px;
+      width: 12px;
+      height: 2px;
+      background: var(--blue);
+    }
+
+    .flow-step b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--navy);
+    }
+
+    .flow-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      table-layout: fixed;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid #e7edf4;
+      vertical-align: top;
+    }
+
+    th {
+      color: #fff;
+      background: var(--navy-2);
+      text-align: left;
+      font-weight: 800;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .risk {
+      display: inline-flex;
+      min-width: 44px;
+      justify-content: center;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .risk.high {
+      color: var(--high);
+      background: #fdeaea;
+    }
+
+    .risk.mid {
+      color: var(--mid);
+      background: #fff5d8;
+    }
+
+    .risk.low {
+      color: var(--low);
+      background: #e8f6ef;
+    }
+
+    ul {
+      margin: 10px 0 16px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .source-item {
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .source-item b {
+      color: var(--navy);
+    }
+
+    .footer-note {
+      margin: 22px 0 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .shell {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .side {
+        position: static;
+        height: auto;
+      }
+
+      .nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-grid,
+      .grid-2,
+      .flow {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        padding: 10px;
+      }
+
+      .hero,
+      section {
+        padding: 28px 20px;
+      }
+
+      .hero h2 {
+        font-size: 34px;
+      }
+
+      .hero-grid,
+      .grid-2,
+      .flow,
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .flow-step::after {
+        display: none;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        table-layout: auto;
+        white-space: normal;
+      }
+
+      th,
+      td {
+        min-width: 140px;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .shell {
+        display: block;
+        max-width: none;
+        padding: 0;
+      }
+
+      .side {
+        display: none;
+      }
+
+      .hero,
+      section {
+        margin: 0 0 18px;
+        border-radius: 0;
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      a {
+        color: var(--blue);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">
+        <div class="eyebrow"><span class="dot"></span>项目一深度研究附件</div>
+        <h1>PIPIA 专项工作底稿</h1>
+        <p>承接主作品集“项目一：帕姆帮帮（测试版）数据与 AI 合规复盘”，重点展示评估底稿、风险矩阵和验收证据包。</p>
+      </div>
+
+      <nav class="nav" aria-label="章节导航">
+        <a href="#summary"><span class="no">01</span><span>执行摘要</span></a>
+        <a href="#scope"><span class="no">02</span><span>事实边界</span></a>
+        <a href="#processing"><span class="no">03</span><span>工作底稿</span></a>
+        <a href="#pipia"><span class="no">04</span><span>PIPIA 判断</span></a>
+        <a href="#principles"><span class="no">05</span><span>三性分析</span></a>
+        <a href="#ai"><span class="no">06</span><span>AI 合规</span></a>
+        <a href="#minor"><span class="no">07</span><span>未成年人</span></a>
+        <a href="#third"><span class="no">08</span><span>第三方与出境</span></a>
+        <a href="#risk"><span class="no">09</span><span>风险矩阵</span></a>
+        <a href="#action"><span class="no">10</span><span>验收证据包</span></a>
+        <a href="#review"><span class="no">11</span><span>复评条件</span></a>
+        <a href="#sources"><span class="no">12</span><span>资料来源</span></a>
+      </nav>
+
+      <div class="tools">
+        <button class="button" type="button" onclick="window.print()">导出 PDF / 打印</button>
+        <a class="button secondary" href="../index.html">返回主作品集</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="hero" id="top">
+        <div class="kicker"><span class="dot"></span>PROJECT 01 DEEP DIVE | PIPIA WORKPAPER</div>
+        <h2>项目一深度研究附件：PIPIA 专项工作底稿（模拟）</h2>
+        <p class="subtitle">本页承接主作品集项目一，不再重复完整功能介绍，重点展开个人信息保护影响评估的工作底稿、判断链条、风险矩阵、整改验收材料和复评机制。</p>
+        <div class="hero-grid">
+          <div class="metric"><span>所属项目</span><strong>项目一：帕姆帮帮</strong></div>
+          <div class="metric"><span>核心交付</span><strong>PIPIA 工作底稿</strong></div>
+          <div class="metric"><span>重点内容</span><strong>风险矩阵 / 证据包</strong></div>
+          <div class="metric"><span>使用方式</span><strong>面试追问材料</strong></div>
+        </div>
+      </header>
+
+      <section id="summary">
+        <div class="section-head"><span class="section-no">01</span><h3>执行摘要</h3></div>
+        <p class="lead">本报告作为主作品集“项目一：帕姆帮帮（测试版）数据与 AI 合规复盘”的深度研究附件，围绕游戏内 AI 助手可能涉及的个人信息处理活动，进一步呈现 PIPIA 专项评估的工作底稿、判断逻辑和整改验收路径。</p>
+        <div class="callout">
+          <strong>附件定位：</strong>主作品集用于展示项目一的背景、数据流和初步风险；本附件用于展示更细的评估底稿，包括处理活动颗粒度、PIPIA 触发判断、三性分析、第三方排除项、风险矩阵、整改验收证据和复评条件。
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <b>本附件回答的问题</b>
+            <ul>
+              <li>一项游戏 AI 助手功能如何被拆成可审查的个人信息处理活动。</li>
+              <li>哪些处理活动可能触发 PIPIA 或专项升级。</li>
+              <li>法务如何把风险判断转化为产品、技术、安全可执行的材料清单。</li>
+              <li>上线后哪些变化会导致原评估结论需要复核。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>与主作品集的分工</b>
+            <p>主作品集侧重展示功能背景、数据流识别和初步合规结论；本附件进一步展开专项评估过程，呈现从处理活动拆解、PIPIA 触发判断到整改证据归档的完整工作链条。</p>
+          </div>
+        </div>
+        <div class="chips">
+          <span class="chip">个人信息保护</span>
+          <span class="chip">生成式 AI</span>
+          <span class="chip">训练数据治理</span>
+          <span class="chip">未成年人保护</span>
+          <span class="chip">游戏内 AI 助手</span>
+        </div>
+      </section>
+
+      <section id="scope">
+        <div class="section-head"><span class="section-no">02</span><h3>附件边界与承接关系</h3></div>
+        <p class="lead">本附件不重复展开“帕姆帮帮”的完整公开功能说明，仅保留形成 PIPIA 工作底稿所必需的评估边界。基础功能事实、数据流概览和初步结论以主作品集项目一为准。</p>
+        <table>
+          <tbody>
+            <tr><th style="width: 18%">所属关系</th><td>主作品集项目一的深度研究附件，而非独立新项目。</td></tr>
+            <tr><th>本页重点</th><td>PIPIA 工作底稿、处理活动颗粒度、三性分析、风险矩阵、整改验收证据、复评条件。</td></tr>
+            <tr><th>评估边界</th><td>不接触真实内部系统、合同、模型架构和日志数据；涉及未知技术链路均以“需向业务确认”列示。</td></tr>
+            <tr><th>不纳入范围</th><td>不重复展示完整功能背景，不评价游戏内容质量、商业运营策略、官方实际技术实现和内部合同安排。</td></tr>
+          </tbody>
+        </table>
+        <div class="callout gold">
+          <strong>重要说明：</strong>本报告不代表米哈游或《崩坏：星穹铁道》官方立场，也不构成对实际产品合规状态的结论。报告仅用于展示法学生在游戏 AI 功能中拆解数据流、识别 PIPIA 触发点、提出治理措施和形成合规交付物的能力。
+        </div>
+      </section>
+
+      <section id="processing">
+        <div class="section-head"><span class="section-no">03</span><h3>PIPIA 工作底稿：处理活动颗粒度</h3></div>
+        <p class="lead">主作品集已经展示基础数据流，本附件进一步把数据流转化为 PIPIA 工作底稿。底稿的作用不是重复画流程，而是固定“处理活动、字段范围、权益影响、控制证据和需确认事项”，便于后续审计和整改验收。</p>
+        <div class="grid-2">
+          <div class="card">
+            <b>底稿必填字段</b>
+            <ul>
+              <li>处理活动编号与业务模块。</li>
+              <li>字段清单、触发时机和调用范围。</li>
+              <li>处理目的、合法性基础和必要性说明。</li>
+              <li>对个人权益的影响和剩余风险。</li>
+              <li>告知、同意、关闭、删除、审计等证据材料。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>与主作品集的区别</b>
+            <p>主作品集回答“这个功能大概有哪些数据和风险”；本附件回答“如果进入正式评估，法务需要向产品、技术、安全团队收集哪些证据，并如何形成可归档的判断链”。</p>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 10%">底稿编号</th>
+              <th style="width: 16%">处理活动</th>
+              <th style="width: 20%">需确认字段</th>
+              <th style="width: 18%">权益影响</th>
+              <th style="width: 18%">PIPIA 关注点</th>
+              <th style="width: 18%">证据材料</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>PA-01</td><td>入口与资格判断</td><td>账号标识、登录状态、等级/任务资格标签。</td><td>决定用户是否可进入功能或领取相关权益。</td><td>是否存在过度调用账号信息。</td><td>字段白名单、接口说明、资格规则截图。</td></tr>
+            <tr><td>PA-02</td><td>用户自由输入处理</td><td>玩家问题、反馈文本、误输入的联系方式或敏感内容。</td><td>可能暴露现实身份、账号安全或未成年人相关信息。</td><td>是否设置输入前提示、识别拦截和误收集删除。</td><td>提示文案、敏感字段规则、删除工单记录。</td></tr>
+            <tr><td>PA-03</td><td>游戏上下文调用</td><td>角色、材料、任务、活动、养成状态的最小摘要。</td><td>可能形成游戏行为画像或影响资源投入。</td><td>不同模块是否分别设置上下文字段白名单。</td><td>字段映射表、模块调用说明、必要性论证。</td></tr>
+            <tr><td>PA-04</td><td>模型生成与输出审核</td><td>提示词、上下文摘要、模型回复、拒答标签。</td><td>可能产生误导、消费诱导、账号安全或专业建议风险。</td><td>是否设置内容安全审核、AI 标识和纠错机制。</td><td>红队测试记录、标识截图、反馈处理 SOP。</td></tr>
+            <tr><td>PA-05</td><td>内容分析与训练样本分流</td><td>输入/回复样本、反馈标签、去标识化处理结果。</td><td>从当次服务延伸到模型优化，处理目的发生扩展。</td><td>是否具备训练用途说明、关闭开关和历史数据边界。</td><td>训练数据说明、开关截图、样本脱敏说明。</td></tr>
+            <tr><td>PA-06</td><td>日志、投诉与审计留痕</td><td>调用日志、异常记录、投诉工单、操作日志。</td><td>支撑安全和纠纷处理，但可能带来留存过长或权限扩散。</td><td>是否设置最短留存、权限审批和到期删除。</td><td>权限矩阵、留存策略、访问日志、删除证明。</td></tr>
+          </tbody>
+        </table>
+        <h4>数据生命周期控制</h4>
+        <table>
+          <thead><tr><th style="width: 16%">阶段</th><th>控制要点</th></tr></thead>
+          <tbody>
+            <tr><td>收集前</td><td>在入口页提示 AI 生成属性、不可输入敏感信息、训练用途和关闭路径。</td></tr>
+            <tr><td>调用中</td><td>模型侧只接收完成该问题所需的最小上下文字段，默认不传入实名、支付、身份证件、精确位置等非必要字段。</td></tr>
+            <tr><td>输出前</td><td>对违法违规、账号安全、消费诱导、未成年人和专业建议内容进行审核或拒答。</td></tr>
+            <tr><td>留存中</td><td>将服务日志、训练候选样本、反馈工单和安全日志分库或分权管理，并设置最短必要留存期限。</td></tr>
+            <tr><td>退出后</td><td>用户关闭训练用途后停止新增样本进入训练链路，并说明已采集数据、未训练数据、已训练数据的处理边界。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="pipia">
+        <div class="section-head"><span class="section-no">04</span><h3>PIPIA 触发判断</h3></div>
+        <p class="lead">个人信息保护影响评估的目的，是在开展可能对个人权益产生重大影响的个人信息处理活动前，系统评估处理目的、处理方式、个人权益影响和安全风险，并据此确定必要的保护措施、整改要求和留存记录。</p>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 14%">触发事项</th>
+              <th style="width: 23%">法律/监管逻辑</th>
+              <th style="width: 24%">本功能体现</th>
+              <th style="width: 13%">评估结论</th>
+              <th style="width: 26%">需落地材料</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>敏感个人信息</td><td>处理敏感个人信息可能对人格尊严、人身财产安全产生重大影响，应采取更严格措施。</td><td>自由文本输入中可能出现姓名、手机号、账号密码、身份证件、健康状态、未成年人身份等。</td><td><span class="risk high">高度接近触发</span></td><td>敏感字段识别规则、输入提示、脱敏/拦截策略、删除流程。</td></tr>
+            <tr><td>自动化决策</td><td>利用个人信息进行自动化决策并影响权益时，应保证透明、公平和可拒绝。</td><td>系统可能根据角色、材料、任务进度生成养成、活动和奖励建议。</td><td><span class="risk mid">专项审查</span></td><td>个性化逻辑说明、消费诱导测试、关闭/申诉路径。</td></tr>
+            <tr><td>模型训练用途</td><td>训练优化不是完成当次对话的必要环节，应单独说明处理目的和退出机制。</td><td>公开资料提及输入与回复可能经去标识化后用于内容分析和模型训练。</td><td><span class="risk high">建议完整评估</span></td><td>训练数据说明、授权/关闭机制、历史数据边界、样本删除记录。</td></tr>
+            <tr><td>第三方处理</td><td>委托处理、共同处理或向第三方提供个人信息均需明确责任边界和安全义务。</td><td>AI 模型、云服务、内容安全、日志分析、客服系统均可能参与。</td><td><span class="risk mid">需尽调确认</span></td><td>处理关系判断表、DPA/合同条款、供应商安全材料。</td></tr>
+            <tr><td>未成年人信息</td><td>未成年人个人信息需适用更严格的保护标准，儿童信息处理更需审慎。</td><td>游戏存在未成年人用户，AI 对话和养成建议可能影响其权益。</td><td><span class="risk high">重点审查</span></td><td>未成年人默认策略、监护人权利路径、专项审计日志。</td></tr>
+            <tr><td>数据出境排除</td><td>如存在境外接收、境外远程访问或境外关联方处理，需进一步判断出境合规路径。</td><td>模型、日志、客服或技术支持是否位于境外需依真实架构确认。</td><td><span class="risk mid">排除项检查</span></td><td>技术链路图、供应商所在地、远程访问权限、出境评估记录。</td></tr>
+          </tbody>
+        </table>
+        <div class="callout gold">
+          <strong>PIPIA 结论：</strong>在本模拟场景下，建议将帕姆帮帮纳入专项 PIPIA。评估文件应至少载明处理活动、处理目的和方式、对个人权益的影响、主要安全风险、拟采取的保护措施、剩余风险和复评触发条件，并保存评估记录供审计和监管问询使用。
+        </div>
+      </section>
+
+      <section id="principles">
+        <div class="section-head"><span class="section-no">05</span><h3>合法性、正当性、必要性分析</h3></div>
+        <table>
+          <thead><tr><th style="width: 12%">审查维度</th><th style="width: 27%">判断口径</th><th style="width: 31%">本功能关注点</th><th style="width: 30%">建议结论</th></tr></thead>
+          <tbody>
+            <tr><td>合法性</td><td>处理目的和方式应有明确依据，不得通过概括授权扩大用途。</td><td>提供对话服务与用于模型训练应区分；敏感信息和未成年人信息需更严格规则。</td><td>设置专项告知与显著关闭路径，必要时取得单独同意或监护人授权。</td></tr>
+            <tr><td>正当性</td><td>处理活动应服务于合理产品功能，不得形成过度画像、消费操纵或不公平差异待遇。</td><td>养成建议、奖励提示和活动导航可能影响资源投入和消费心理。</td><td>限制诱导性表达，保留 AI 生成属性和纠错/申诉入口。</td></tr>
+            <tr><td>必要性</td><td>只收集和使用实现具体功能所需的最少字段。</td><td>并非所有账号信息都需进入模型；不同模块需要的上下文不同。</td><td>按“泛对话/养成/导航/奖励”分别设计字段白名单。</td></tr>
+            <tr><td>透明性</td><td>用户应清楚知道 AI 生成、数据用途、训练开关、保存期限和权利路径。</td><td>入口提示、数据设置页和隐私政策应形成一致说明。</td><td>采用入口短提示 + 设置页说明 + 专项隐私说明三层告知。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="ai">
+        <div class="section-head"><span class="section-no">06</span><h3>AI 合规专项评估</h3></div>
+        <p class="lead">该功能属于以生成式 AI 技术向玩家提供文本回复、玩法解释和场景化建议的功能形态。合规审查不应仅停留在“是否提示 AI 生成”，还应覆盖训练数据来源、输出内容安全、生成合成内容标识、用户投诉纠错和未成年人保护。</p>
+        <div class="grid-2">
+          <div class="card">
+            <b>生成内容安全</b>
+            <ul>
+              <li>不得诱导玩家提供账号密码、验证码、手机号、真实住址等信息。</li>
+              <li>不得以角色身份提供医疗、法律、金融等专业判断。</li>
+              <li>养成建议应避免直接形成充值、抽卡、限时消费等强诱导表达。</li>
+              <li>对外挂、脚本、账号交易、绕过防沉迷等内容设置拒答策略。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <b>生成合成内容标识</b>
+            <p>公开说明中的 AI 生成提示属于积极设计。进一步审查时，应确认游戏内对话界面是否持续展示 AI 生成属性，玩家截图、转发或社区分享时是否尽量保留显式标识。若未来扩展到语音、图片、视频或角色形象生成，还需同步评估显式标识和隐式标识方案。</p>
+          </div>
+        </div>
+        <div class="callout">
+          <strong>训练数据治理重点：</strong>训练数据治理的核心是区分“完成当次服务所必需的数据处理”和“用于模型优化的进一步处理”。对话服务结束后继续将玩家输入和 AI 回复用于内容分析、标注或训练，应具备清晰告知、关闭机制、样本脱敏、访问控制、留存期限和删除流程。
+        </div>
+      </section>
+
+      <section id="minor">
+        <div class="section-head"><span class="section-no">07</span><h3>未成年人保护专项控制</h3></div>
+        <p class="lead">游戏产品天然需要考虑未成年人保护。AI 助手既可能提升游戏体验，也可能通过长时段陪伴、情绪回应、奖励提醒和养成建议影响未成年人权益。建议将未成年人账号作为单独风险层，而不是仅作为一般用户的一部分处理。</p>
+        <table>
+          <thead><tr><th style="width: 14%">控制项</th><th style="width: 25%">默认策略</th><th style="width: 30%">风险说明</th><th style="width: 31%">验收材料</th></tr></thead>
+          <tbody>
+            <tr><td>训练用途</td><td>默认不进入模型训练或需更严格授权</td><td>未成年人输入可能包含更高敏感性和保护需求。</td><td>账号年龄标签策略、训练样本过滤记录、监护人授权说明。</td></tr>
+            <tr><td>内容陪伴</td><td>不主动延长陪伴式对话</td><td>过度拟人化陪伴可能形成情绪依赖。</td><td>拒答/转向规则、长时段对话限制、提示文案。</td></tr>
+            <tr><td>消费边界</td><td>养成建议不与充值抽卡强绑定</td><td>建议可能影响未成年人消费或资源投入。</td><td>消费诱导测试集、提示词模板、审核记录。</td></tr>
+            <tr><td>监护人权利</td><td>提供查询、删除、投诉、关闭路径</td><td>监护人需要能够了解和控制儿童信息处理。</td><td>客服 SOP、工单标签、处理时限、删除记录。</td></tr>
+            <tr><td>审计留痕</td><td>记录权限审批、访问、导出和删除操作</td><td>留痕用于证明谁在何时基于何种原因处理相关数据。</td><td>权限矩阵、操作日志、删除证明、审计抽样报告。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="third">
+        <div class="section-head"><span class="section-no">08</span><h3>第三方处理与出境排除项</h3></div>
+        <p class="lead">第三方服务或 SDK 接入本身不等于数据出境。境内法务方向下，应先判断第三方在本功能中的处理角色，再审查合同、权限、数据字段和安全措施；同时保留一项数据出境排除检查，用于确认是否存在境外接收、境外远程访问或境外关联方处理。</p>
+        <table>
+          <thead><tr><th style="width: 15%">潜在参与方</th><th style="width: 23%">可能数据</th><th style="width: 18%">角色判断</th><th style="width: 21%">主要风险</th><th style="width: 23%">审查材料</th></tr></thead>
+          <tbody>
+            <tr><td>模型/云服务</td><td>提示词、上下文摘要、输出内容、调用日志</td><td>多为委托处理，视合同和控制权确认。</td><td>训练留存、模型记忆、境外访问。</td><td>DPA、供应商安全报告、部署和访问说明。</td></tr>
+            <tr><td>内容安全服务</td><td>玩家输入、AI 输出、风险标签</td><td>委托处理或独立服务。</td><td>过度留存、二次用途、误伤。</td><td>审核规则、留存期限、删除接口、审计权限。</td></tr>
+            <tr><td>客服/投诉系统</td><td>反馈内容、联系方式、处理记录</td><td>委托处理或内部系统。</td><td>敏感信息进入工单、权限扩散。</td><td>客服 SOP、权限矩阵、脱敏规则。</td></tr>
+            <tr><td>日志分析工具</td><td>设备、IP、错误日志、调用链路</td><td>委托处理或独立处理。</td><td>日志可重新识别个人、留存过长。</td><td>字段清单、采集触发时机、最短留存策略。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="risk">
+        <div class="section-head"><span class="section-no">09</span><h3>风险矩阵与控制建议</h3></div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 7%">编号</th>
+              <th style="width: 24%">风险描述</th>
+              <th style="width: 8%">可能性</th>
+              <th style="width: 8%">影响</th>
+              <th style="width: 8%">等级</th>
+              <th style="width: 33%">控制措施</th>
+              <th style="width: 12%">责任团队</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>R01</td><td>自由文本输入包含敏感个人信息或账号安全信息。</td><td>中</td><td>高</td><td><span class="risk high">高</span></td><td>入口提示、正则/模型识别、脱敏拦截、误收集删除机制。</td><td>产品/安全/法务</td></tr>
+            <tr><td>R02</td><td>模型调用上下文过度，传入完整账号画像。</td><td>中</td><td>中高</td><td><span class="risk mid">中高</span></td><td>按模块字段白名单和最小必要接口，不传无关数据。</td><td>产品/服务端</td></tr>
+            <tr><td>R03</td><td>训练用途告知不足或关闭后仍进入训练链路。</td><td>中</td><td>高</td><td><span class="risk high">高</span></td><td>训练目的单独说明、关闭开关、样本分流、历史数据规则。</td><td>法务/算法</td></tr>
+            <tr><td>R04</td><td>AI 回复形成消费诱导或误导性养成建议。</td><td>中</td><td>中高</td><td><span class="risk mid">中高</span></td><td>消费诱导红队测试、输出模板约束、反馈纠错。</td><td>内容安全/运营</td></tr>
+            <tr><td>R05</td><td>未成年人账号缺少差异化保护。</td><td>中</td><td>高</td><td><span class="risk high">高</span></td><td>默认关闭训练用途、限制陪伴和消费导向、监护人权利路径。</td><td>未保/法务</td></tr>
+            <tr><td>R06</td><td>第三方服务留存或二次使用数据。</td><td>低中</td><td>高</td><td><span class="risk mid">中高</span></td><td>合同限制、供应商尽调、删除接口、审计权和事件通知。</td><td>法务/采购</td></tr>
+            <tr><td>R07</td><td>日志和反馈工单留存过长或权限过宽。</td><td>中</td><td>中</td><td><span class="risk mid">中</span></td><td>分级权限、最短留存、访问日志、定期抽样审计。</td><td>安全/客服</td></tr>
+            <tr><td>R08</td><td>AI 标识在分享或截图后丢失。</td><td>中</td><td>中</td><td><span class="risk mid">中</span></td><td>界面常驻提示、导出水印、社区发布提示。</td><td>客户端/社区</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="action">
+        <div class="section-head"><span class="section-no">10</span><h3>整改验收证据包</h3></div>
+        <p class="lead">主作品集已经列出整改方向，本附件进一步把整改项转换为可归档、可抽查、可对外解释的证据包。这样在审计或监管问询时，不只是说明“已评估”，而是能证明评估结论已经落到产品和技术控制上。</p>
+        <table>
+          <thead><tr><th style="width: 9%">证据编号</th><th style="width: 22%">证据名称</th><th style="width: 22%">对应风险</th><th style="width: 28%">验收口径</th><th style="width: 19%">归档责任方</th></tr></thead>
+          <tbody>
+            <tr><td>E01</td><td>PIPIA 评估记录与评审纪要</td><td>高风险处理活动识别</td><td>记录处理活动、风险结论、控制措施、剩余风险和复评条件。</td><td>法务/隐私合规</td></tr>
+            <tr><td>E02</td><td>字段白名单与接口调用说明</td><td>上下文过度调用</td><td>按模块列明允许传入模型的字段，证明未传入无关账号画像。</td><td>产品/服务端</td></tr>
+            <tr><td>E03</td><td>训练用途说明与关闭开关截图</td><td>训练目的扩展</td><td>证明训练用途单独说明、关闭路径清晰，关闭后新数据不再进入训练链路。</td><td>产品/算法/法务</td></tr>
+            <tr><td>E04</td><td>样本脱敏与去标识化技术说明</td><td>样本可重新识别</td><td>说明脱敏字段、处理流程、重识别风险控制和样本访问权限。</td><td>算法/安全</td></tr>
+            <tr><td>E05</td><td>内容安全红队测试记录</td><td>违法违规、消费诱导、专业建议</td><td>覆盖账号安全、未成年人、充值抽卡诱导、专业建议、违规内容等测试集。</td><td>内容安全/算法</td></tr>
+            <tr><td>E06</td><td>AI 生成标识方案与界面截图</td><td>用户知情不足</td><td>证明对话界面、截图分享或社区传播场景均可识别 AI 生成属性。</td><td>客户端/社区</td></tr>
+            <tr><td>E07</td><td>第三方处理材料包</td><td>供应商二次使用或过度留存</td><td>包括处理关系判断、DPA/合同条款、供应商安全材料、删除接口和事件通知条款。</td><td>法务/采购/安全</td></tr>
+            <tr><td>E08</td><td>权限矩阵、审计日志与删除证明</td><td>日志留存过长或权限扩散</td><td>证明日志分级、访问审批、最短留存、到期删除和异常访问审计。</td><td>安全/客服</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="review">
+        <div class="section-head"><span class="section-no">11</span><h3>复评条件</h3></div>
+        <ul>
+          <li>功能从测试版转为长期开放，或新增更广泛玩家入口。</li>
+          <li>新增语音、图片、视频、角色形象生成或玩家上传图片处理。</li>
+          <li>训练数据范围、关闭机制、模型供应商、云服务部署或日志分析工具发生变化。</li>
+          <li>功能开始直接影响抽卡、充值、资源分配、活动奖励或差异化运营策略。</li>
+          <li>监管规则、国家标准、执法案例或平台政策对生成式 AI、个人信息处理或未成年人保护提出新要求。</li>
+        </ul>
+      </section>
+
+      <section id="sources">
+        <div class="section-head"><span class="section-no">12</span><h3>主要依据与公开资料来源</h3></div>
+        <p class="lead">以下来源用于确定评估框架和公开事实边界。因本报告不接触真实内部系统，关于技术架构和供应商安排的部分均以“需确认事项”处理。</p>
+        <div class="source-list">
+          <div class="source-item"><b>《中华人民共和国个人信息保护法》：</b><a href="https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html" target="_blank" rel="noreferrer">https://www.npc.gov.cn/npc/c2/c30834/202108/t20210820_313088.html</a><br>用于个人信息处理原则、敏感个人信息、自动化决策、委托处理、个人信息保护影响评估等框架。</div>
+          <div class="source-item"><b>《生成式人工智能服务管理暂行办法》：</b><a href="https://www.cac.gov.cn/2023-07/13/c_1690898326795531.htm" target="_blank" rel="noreferrer">https://www.cac.gov.cn/2023-07/13/c_1690898326795531.htm</a><br>用于生成式 AI 服务的数据来源、内容安全、用户权益保护和投诉机制评估。</div>
+          <div class="source-item"><b>《人工智能生成合成内容标识办法》：</b><a href="https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm" target="_blank" rel="noreferrer">https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm</a><br>用于 AI 生成内容显式/隐式标识和传播场景审查。</div>
+          <div class="source-item"><b>《个人信息保护合规审计管理办法》：</b><a href="https://www.cac.gov.cn/2025-02/14/c_1741233507681519.htm" target="_blank" rel="noreferrer">https://www.cac.gov.cn/2025-02/14/c_1741233507681519.htm</a><br>用于审计留痕、评估归档和持续合规检查。</div>
+          <div class="source-item"><b>米游社《帕姆帮帮（测试版）》公开说明：</b><a href="https://bbs.mihoyo.com/sr/wiki/content/7327/detail?bbs_presentation_style=no_header" target="_blank" rel="noreferrer">https://bbs.mihoyo.com/sr/wiki/content/7327/detail?bbs_presentation_style=no_header</a><br>用于公开功能事实的基础描述。</div>
+          <div class="source-item"><b>《崩坏：星穹铁道》官方隐私政策：</b><a href="https://sr.mihoyo.com/terms/privacy" target="_blank" rel="noreferrer">https://sr.mihoyo.com/terms/privacy</a><br>用于产品公开隐私政策边界和用户权利路径参考。</div>
+        </div>
+        <div class="callout">
+          <strong>可在面试中强调的能力点：</strong>本报告展示的不是“背法条”，而是将 AI 功能拆成数据流、字段、处理目的、触发条件、风险矩阵和整改验收材料的能力。这正对应境内数据合规实习中对新功能评估、跨团队协作和合规工具化的核心要求。
+        </div>
+      </section>
+
+      <p class="footer-note">求职作品集模拟材料 · 不代表游戏官方立场 · 2026</p>
+    </main>
+  </div>
+
+  <script>
+    const links = Array.from(document.querySelectorAll(".nav a"));
+    const sections = links
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const updateActive = () => {
+      const offset = window.scrollY + 160;
+      let current = sections[0];
+      for (const section of sections) {
+        if (section.offsetTop <= offset) current = section;
+      }
+      links.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${current.id}`);
+      });
+    };
+
+    window.addEventListener("scroll", updateActive, { passive: true });
+    updateActive();
+  </script>
+</body>
+</html>
